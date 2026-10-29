@@ -46,12 +46,6 @@ export const SettingsModal = ({
     onLaunchEditor();
   };
 
-  const handleFillCredentials = () => {
-    setUserId('admin.in');
-    setPassword('in.admin');
-    setAuthError(false);
-  };
-
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-dialog settings-modal-dialog" onClick={(e) => e.stopPropagation()}>
@@ -130,22 +124,6 @@ export const SettingsModal = ({
                     </p>
                   </div>
 
-                  {/* 1-Click Auto-fill Helper */}
-                  <div 
-                    className="demo-credentials-box mb-4"
-                    onClick={handleFillCredentials}
-                    title="Click to automatically fill credentials"
-                  >
-                    <div className="flex-between mb-1">
-                      <span className="creds-label">Authorized Credentials:</span>
-                      <span className="creds-auto-link">Click to auto-fill</span>
-                    </div>
-                    <div className="creds-values-grid">
-                      <div>Login ID: <strong>admin.in</strong></div>
-                      <div>Password: <strong>in.admin</strong></div>
-                    </div>
-                  </div>
-
                   <form onSubmit={handleLoginSubmit} id="admin-login-form">
                     <div className="form-group mb-3">
                       <label className="form-label" htmlFor="admin-login-id">Login ID</label>
@@ -153,7 +131,7 @@ export const SettingsModal = ({
                         id="admin-login-id"
                         type="text" 
                         required 
-                        placeholder="admin.in"
+                        placeholder="Enter your login ID"
                         className="clean-input"
                         value={userId}
                         onChange={(e) => {
@@ -178,7 +156,7 @@ export const SettingsModal = ({
                         id="admin-password"
                         type={showPassword ? 'text' : 'password'}
                         required 
-                        placeholder="in.admin"
+                        placeholder="••••••••"
                         className="clean-input"
                         value={password}
                         onChange={(e) => {
@@ -191,7 +169,7 @@ export const SettingsModal = ({
                     {authError && (
                       <div className="error-alert-box mb-4">
                         <span className="error-title">Authentication Failed:</span>
-                        <span className="error-desc">Please verify your ID is <strong>admin.in</strong> and password is <strong>in.admin</strong>.</span>
+                        <span className="error-desc">Invalid Login ID or Password. Please try again.</span>
                       </div>
                     )}
 
@@ -329,45 +307,6 @@ export const SettingsModal = ({
         }
         .light-preview .preview-nav { height: 12px; background: #e4e4e7; border-radius: 4px; }
         .light-preview .preview-card { flex: 1; background: #ffffff; border-radius: 6px; border: 1px solid #e4e4e7; }
-
-        /* Admin credentials helper */
-        .demo-credentials-box {
-          background: var(--bg-card);
-          border: 1px dashed var(--border-mid);
-          padding: 12px 14px;
-          border-radius: var(--radius-sm);
-          cursor: pointer;
-          transition: border-color var(--transition-fast), background var(--transition-fast);
-        }
-
-        .demo-credentials-box:hover {
-          border-color: var(--accent);
-          background: var(--border-subtle);
-        }
-
-        .creds-label {
-          font-size: 11px;
-          font-weight: 700;
-          text-transform: uppercase;
-          color: var(--text-secondary);
-          letter-spacing: 0.05em;
-        }
-
-        .creds-auto-link {
-          font-size: 11px;
-          color: var(--accent);
-          font-weight: 600;
-          text-decoration: underline;
-        }
-
-        .creds-values-grid {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-          font-size: 12px;
-          margin-top: 4px;
-          color: var(--text-primary);
-        }
 
         .desktop-notice {
           background: var(--bg-card);
