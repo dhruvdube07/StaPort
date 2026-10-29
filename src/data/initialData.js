@@ -1,5 +1,4 @@
-// NAVKAR CREATIVE ARTS - Master Catalog & Modular Layout
-// Built for 60FPS high-fidelity rendering across 1GB phones to 8GB+ PCs
+// Navkar Creative Arts - Clean Commercial Catalog
 
 export const INITIAL_PRODUCTS = [
   // ================= 1. DECORATIVE & STATUES =================
@@ -7,280 +6,255 @@ export const INITIAL_PRODUCTS = [
     id: "nav-01",
     name: "Animal & Wildlife Statues",
     subname: "Elephant, Horse, Peacock, Lion, Duck",
-    category: "DECORATIVE & STATUES",
-    price: "Custom Quote",
-    material: "High-Density FRP (Fiberglass Reinforced Polymer)",
-    specs: ["Life-Size to Monumental (3ft - 24ft)", "Automotive PU All-Weather Gelcoat", "UV & Marine Grade Weatherproof", "Hand-Sculpted Anatomical Detail"],
+    category: "Statues & Sculptures",
+    material: "High Strength Fiberglass (FRP)",
+    specs: ["Available from 3 ft to 20 ft heights", "All-weather waterproof paint", "Realistic anatomical detail", "Durable outdoor lifespan"],
     image: "https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=900&q=80",
-    description: "Museum-grade fiberglass wildlife sculptures crafted for resorts, luxury estates, and public roundabouts. Features anti-crack internal steel armature and UV-stable pigments."
+    description: "Life-size and grand animal statues for resorts, gardens, farmhouses, and public entryways. Crafted with weather-resistant fiberglass."
   },
   {
     id: "nav-02",
     name: "Cartoon Character Statues",
-    subname: "Theme Park & Mall Attractions",
-    category: "DECORATIVE & STATUES",
-    price: "Custom Quote",
-    material: "Fiberglass & Impact-Resistant Gelcoat",
-    specs: ["Vibrant Gloss / Matte Coating", "Child-Safe Rounded Geometry", "High Scratch Resistance", "Custom Character Development"],
+    subname: "Fun Statues for Kids Play & Malls",
+    category: "Statues & Sculptures",
+    material: "Fiberglass (FRP)",
+    specs: ["Bright and vibrant colors", "Smooth child-safe edges", "Custom designs available", "Long lasting outdoor finish"],
     image: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=900&q=80",
-    description: "High-energy expressive character sculptures for theme parks, indoor play arenas, and shopping centers. Built to withstand continuous visitor interaction."
+    description: "Eye-catching cartoon character models built for children's theme parks, daycares, shopping malls, and family centers."
   },
   {
     id: "nav-03",
     name: "Restaurant Mascot Statues",
-    subname: "Master Chef, Waiter & Traditional Tea Man",
-    category: "DECORATIVE & STATUES",
-    price: "Custom Quote",
-    material: "Reinforced Fiberglass Composite",
-    specs: ["Holds Real Menu Boards or Trays", "Life-Size 5ft - 6.5ft Height", "Heavy Weighted Windproof Base", "Signature Hand-Painted Expressions"],
+    subname: "Chef, Waiter & Tea Man Statues",
+    category: "Statues & Sculptures",
+    material: "Reinforced Fiberglass",
+    specs: ["Holds menu boards or food trays", "Life-size 5 to 6.5 ft tall", "Sturdy weighted base", "Attracts customer selfies"],
     image: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=900&q=80",
-    description: "Iconic hospitality welcome mascots engineered for cafes, highway dhabas, and five-star buffets. Proven to increase footfall and social media selfie engagement."
+    description: "Welcoming chef, waiter, and traditional tea vendor statues for restaurant entrances, cafes, food courts, and highway dhabas."
   },
   {
     id: "nav-04",
     name: "Garden Couple Statues",
-    subname: "Romantic & Classical Landscape Sculptures",
-    category: "DECORATIVE & STATUES",
-    price: "Custom Quote",
-    material: "Marble-Dust & Fiberglass Polymer",
-    specs: ["Italian & Greco-Roman Styling", "Waterproof For Lawn & Fountains", "Antique Bronze or White Marble Finish", "Zero Algae Adhesion"],
-    image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=900&q=80",
-    description: "Elegant landscape sculptures designed for wedding venues, botanical parks, and private villa gardens. Weatherproofed against extreme summer heat and monsoons."
+    subname: "Romantic & Classical Outdoor Sculptures",
+    category: "Statues & Sculptures",
+    material: "Fiberglass & Marble Finish",
+    specs: ["Classical Italian and Roman styles", "Waterproof for lawns and fountains", "Antique bronze or white stone look", "Easy to clean and maintain"],
+    image: "/images/media_1793273334500.jpg",
+    description: "Graceful outdoor couple sculptures perfect for garden lawns, wedding banquet halls, resorts, and villa courtyards."
   },
   {
     id: "nav-05",
     name: "Modern Abstract Sculptures",
-    subname: "Contemporary Architectural Focal Points",
-    category: "DECORATIVE & STATUES",
-    price: "Custom Quote",
-    material: "FRP with Metallic Chrome / Corten Finish",
-    specs: ["Parametric & Organic Geometries", "Mirror-Finish Polyurethane Polish", "Lightweight Structural Framing", "Custom Architectural Heights to 30ft"],
-    image: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=900&q=80",
-    description: "High-concept contemporary sculptures for corporate headquarters, luxury hotel lobbies, and urban traffic islands."
+    subname: "Contemporary Art for Buildings & Parks",
+    category: "Statues & Sculptures",
+    material: "Fiberglass with Gloss Polish",
+    specs: ["Contemporary ribbon and flame shapes", "High gloss red and gold finish", "Lightweight yet strong", "Custom heights from 6 ft to 25 ft"],
+    image: "/images/media_1793273334395.jpg",
+    description: "Striking modern abstract installations suitable for corporate office courtyards, hotel atriums, and upscale residential landscapes."
   },
   {
     id: "nav-06",
     name: "Fashion Mannequins",
-    subname: "High-Street & Bespoke Display Forms",
-    category: "DECORATIVE & STATUES",
-    price: "Custom Quote",
-    material: "Engineered Polymer Composite",
-    specs: ["Matte Velvet, Gloss or Metallic Plated", "Magnetic Detachable Limb Joints", "Tempered Glass Footplate", "Ergonomic Proportions"],
+    subname: "Clothing & Retail Display Models",
+    category: "Statues & Sculptures",
+    material: "Durable Polymer Fiberglass",
+    specs: ["Matte, gloss, or metallic finishes", "Detachable arms and hands", "Sturdy tempered glass stand", "Modern realistic proportions"],
     image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80",
-    description: "Premium retail mannequins engineered for luxury apparel showrooms, fashion runways, and high-end department storefronts."
+    description: "High quality fashion mannequins for boutique showrooms, apparel retailers, and luxury clothing exhibitions."
   },
   {
     id: "nav-07",
     name: "3D Wall Murals & Relief Panels",
-    subname: "Architectural Feature Wall Art",
-    category: "DECORATIVE & STATUES",
-    price: "Custom Quote",
-    material: "Fiberglass Bas-Relief & Resin",
-    specs: ["Intricate Deep 3D Textures", "Interlocking Seamless Panels", "Interior & Exterior Grade", "Gold Leaf / Patina / Stone Washes"],
+    subname: "Decorative Textured Feature Walls",
+    category: "Statues & Sculptures",
+    material: "Carved Fiberglass Panel",
+    specs: ["Deep 3D sculpted textures", "Seamless wall mounting", "Indoor and outdoor use", "Stone, metallic, or antique gold colors"],
     image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=80",
-    description: "Dramatic relief wall installations for temples, hotel receptions, executive suites, and feature elevation walls."
+    description: "Artistic 3D relief panels and murals for feature walls, living rooms, hotel lobbies, temples, and conference rooms."
   },
   {
     id: "nav-08",
     name: "Water Fountains & Waterfall Backdrops",
-    subname: "Sculpted Cascades & Rock Mimicry",
-    category: "DECORATIVE & STATUES",
-    price: "Custom Quote",
-    material: "Hydrophobic FRP & Artificial Rockwork",
-    specs: ["Integrated Water Flow Channels", "70% Lighter than Natural Stone", "Concealed Submersible Pump Mounts", "LED Underwater Glow Fittings"],
+    subname: "Natural Rock Look & Cascade Water Features",
+    category: "Statues & Sculptures",
+    material: "Waterproof Fiberglass Stone Mimic",
+    specs: ["Integrated water flow channels", "Much lighter than natural stone", "Fits standard water pumps", "LED lighting compatibility"],
     image: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=900&q=80",
-    description: "Naturalistic waterfall backdrops and kinetic decorative fountains for pool surrounds, courtyards, and entrance atriums."
+    description: "Decorative waterfall backdrops and cascading fountains for gardens, pool surrounds, and entrance patios."
   },
 
   // ================= 2. WATER PARK, RESORT & POOL =================
   {
     id: "nav-09",
     name: "Open-Body Water Slides",
-    subname: "High-Velocity Flumes & Serpentine Curves",
-    category: "WATER PARK, RESORT & POOL",
-    price: "Custom Quote",
-    material: "Isophthalic Resins & Food-Grade Gelcoat",
-    specs: ["Glass-Smooth Frictionless Surface", "Galvanized Heavy Steel Support Structure", "Engineered Water Lubrication Ports", "Complies with ASTM / EN Waterpark Standards"],
+    subname: "Curved and Straight Flume Slides",
+    category: "Water Park & Pool",
+    material: "Heavy-Duty Fiberglass (FRP)",
+    specs: ["Smooth frictionless sliding surface", "Hot-dip galvanized steel tower", "Water lubrication jets included", "Safe for kids and adults"],
     image: "https://images.unsplash.com/photo-1582650625119-3a31f8418b7d?auto=format&fit=crop&w=900&q=80",
-    description: "Exciting open-flume slides engineered for resorts and municipal water parks. Micro-polished joints guarantee a frictionless, zero-scratch ride experience."
+    description: "Classic open-flume water slides designed for hotels, water parks, and community club swimming pools."
   },
   {
     id: "nav-10",
     name: "Closed-Tube / Tunnel Water Slides",
-    subname: "Black Hole & Translucent Ring Experience",
-    category: "WATER PARK, RESORT & POOL",
-    price: "Custom Quote",
-    material: "Multi-Layer FRP with Light-Pipe Rings",
-    specs: ["Sensory Light Effect Translucent Bands", "Hydrodynamic Engineered Trajectory", "Leak-Proof Bolt Flange Technology", "Emergency Egress Protocols"],
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80",
-    description: "High-adrenaline enclosed tube slides with optical daylight rings and exhilarating drop profiles."
+    subname: "Spiral Enclosed Pool Water Slides",
+    category: "Water Park & Pool",
+    material: "High Grade Fiberglass Tube",
+    specs: ["Spiral enclosed funnel design", "Safe splash landing pool exit", "Robust galvanized steel staircase", "Sun and chlorine resistant color"],
+    image: "/images/media_1793273334379.jpg",
+    description: "Exciting enclosed spiral water slides for resort pools, water parks, and recreational resorts. Completely enclosed for high thrills and safety."
   },
   {
     id: "nav-11",
     name: "Multi-Lane Racing Water Slides",
-    subname: "Mat Racer 2-Lane to 6-Lane Configurations",
-    category: "WATER PARK, RESORT & POOL",
-    price: "Custom Quote",
-    material: "Heavy-Duty Marine Fiberglass",
-    specs: ["Side-by-Side Competitive Layout", "Runout Deceleration Braking Troughs", "Precision Height Gradients", "High Hourly Visitor Capacity"],
+    subname: "2 to 4 Lane Mat Racing Slides",
+    category: "Water Park & Pool",
+    material: "Commercial Grade Marine Fiberglass",
+    specs: ["Multi-person side-by-side racing", "Built-in water deceleration lanes", "High capacity for busy days", "Smooth seamless joints"],
     image: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=900&q=80",
-    description: "Popular family-competition slides where riders race head-to-head on aerodynamic foam mats into integrated splash run-outs."
+    description: "Popular multi-lane racing slides where friends and families slide together side-by-side into a refreshing splash lane."
   },
   {
     id: "nav-12",
     name: "Pendulum & Bowl Water Slides",
-    subname: "Space Bowl & Zero-Gravity Wave",
-    category: "WATER PARK, RESORT & POOL",
-    price: "Custom Quote",
-    material: "Vacuum-Infused Composite Shell",
-    specs: ["Centrifugal Centering Bowl", "Deep Oscillating Pendulum Wall", "Double or Single Raft Compatible", "Maximum Thrill Safety Margin"],
+    subname: "Space Bowl and Wave Slides",
+    category: "Water Park & Pool",
+    material: "Heavy Structural Fiberglass",
+    specs: ["High speed centrifugal bowl", "Single and double raft compatible", "Maximum thrill factor", "Engineered water flow governance"],
     image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=80",
-    description: "Mega-attraction bowl slides that drop riders into a high-speed spiral bowl before plunging into the central splash exit."
+    description: "Signature attraction bowl slides that spin riders in an exhilarating spiral before sliding into the main pool."
   },
   {
     id: "nav-13",
     name: "Rain Dance Umbrellas & Mushroom Showers",
-    subname: "Interactive Resort Splash Features",
-    category: "WATER PARK, RESORT & POOL",
-    price: "Custom Quote",
-    material: "UV-Stabilized FRP Canopy",
-    specs: ["360-Degree Uniform Water Curtain", "Child-Safe Soft Impact Spray", "Internal Stainless Steel Water Core", "Diameter Options: 1.5m to 3.0m"],
+    subname: "Water Mushrooms for Toddler & Splash Pools",
+    category: "Water Park & Pool",
+    material: "Fiberglass Canopy with Steel Pole",
+    specs: ["Creates a 360-degree water curtain", "Soft gentle spray for children", "Diameter options from 4 ft to 10 ft", "Bright cheerful colors"],
     image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=900&q=80",
-    description: "Captivating centerpiece water mushrooms delivering continuous cascading sheets of water for toddler zones and resort splash pads."
+    description: "Decorative mushroom showers creating a gentle waterfall curtain for kids pools, splash pads, and rain dance areas."
   },
   {
     id: "nav-14",
     name: "Tipping Water Buckets",
-    subname: "Mega Splash Dump Systems (300L - 1500L)",
-    category: "WATER PARK, RESORT & POOL",
-    price: "Custom Quote",
-    material: "Heavy-Gauge Reinforced Fiberglass",
-    specs: ["Auto-Counterbalanced Tipping Action", "Adjustable Cycle Timing (30s - 90s)", "Dramatic Splash Radius", "Corrosion-Proof Heavy Pivot Bearings"],
+    subname: "Automatic Splash Dump Buckets",
+    category: "Water Park & Pool",
+    material: "Fiberglass Bucket with Steel Frame",
+    specs: ["Automatic tipping balance system", "Holds 200 to 1000 liters of water", "Heavy corrosion-proof bearings", "The main crowd attraction"],
     image: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=900&q=80",
-    description: "The ultimate water play crowd pleaser. Slowly accumulates water before releasing an immense torrent onto anticipating visitors below."
+    description: "Fills with water and automatically tips over every minute to unleash a giant splash over excited swimmers below."
   },
   {
     id: "nav-15",
     name: "Readymade Fiberglass Swimming Pools",
-    subname: "Pre-Formed Monolithic Pools & Plunge Spas",
-    category: "WATER PARK, RESORT & POOL",
-    price: "Custom Quote",
-    material: "Composite One-Piece Monolithic Shell",
-    specs: ["Installed in as few as 3 to 7 Days", "Zero Risk of Ceramic Tile Leaks", "Silky Non-Porous Gelcoat Finish", "Sizes from 12ft Plunges to 40ft Laps"],
+    subname: "One-Piece Monolithic Pools & Plunges",
+    category: "Water Park & Pool",
+    material: "Composite One-Piece Fiberglass Shell",
+    specs: ["Installed in as little as 3 to 7 days", "100% leak proof monolithic body", "Smooth easy-to-clean gelcoat", "Available from 12 ft to 35 ft lengths"],
     image: "https://images.unsplash.com/photo-1572331165267-854da2b10ccc?auto=format&fit=crop&w=900&q=80",
-    description: "Revolutionary pre-molded fiberglass pools delivered directly to site. Cuts installation time by 90% compared to traditional concrete construction."
+    description: "Pre-formed fiberglass pools delivered directly to your villa, resort, or rooftop. Faster, cleaner, and more durable than concrete pools."
   },
   {
     id: "nav-16",
     name: "Paddle Boats, Kayaks & Canoes",
-    subname: "Lake, Resort & Theme Watercraft",
-    category: "WATER PARK, RESORT & POOL",
-    price: "Custom Quote",
-    material: "Dual-Hull Unsinkable FRP Foam Filled",
-    specs: ["2-Seater, 4-Seater & Swan/Duck Shapes", "Stainless Steel Mechanical Pedals", "Built-In Buoyancy Foam Blocks", "Zero-Maintenance Hull Design"],
+    subname: "Swan Boats & Recreation Kayaks",
+    category: "Water Park & Pool",
+    material: "Unsinkable Double-Hull Fiberglass",
+    specs: ["2-seater, 4-seater, and swan shapes", "Stainless steel pedal mechanism", "Internal safety buoyancy foam", "Virtually zero maintenance"],
     image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=80",
-    description: "Commercial pedal boats and tourist kayaks featuring unsinkable double-hull construction and effortless pedal ergonomics."
+    description: "Commercial pedal boats and tourist kayaks for lakes, resort water bodies, and leisure parks."
   },
   {
     id: "nav-17",
     name: "Poolside Sun Loungers",
-    subname: "Ergonomic In-Water & Deck Recliners",
-    category: "WATER PARK, RESORT & POOL",
-    price: "Custom Quote",
-    material: "Commercial Grade UV-Resistant FRP",
-    specs: ["Submersible for Tanning Ledges", "Zero Rust / Zero Fading", "Contoured Spine Ergonomics", "Stackable & Lightweight"],
+    subname: "Ergonomic Deck & In-Water Chairs",
+    category: "Water Park & Pool",
+    material: "Commercial Grade UV Fiberglass",
+    specs: ["Can sit directly in shallow pool water", "Will not rust, peel, or fade", "Ergonomic comfortable design", "Stackable and lightweight"],
     image: "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=900&q=80",
-    description: "Sleek sculptural poolside loungers engineered to sit directly in shallow baja pool shelves or along luxury resort decks."
+    description: "Modern luxury pool loungers designed to stay dry on the deck or placed inside shallow swimming pool ledges."
   },
 
   // ================= 3. PLAYGROUND & PARK =================
   {
     id: "nav-18",
     name: "Multi-Play Stations",
-    subname: "Comprehensive Theme Towers & Bridges",
-    category: "PLAYGROUND & PARK",
-    price: "Custom Quote",
-    material: "LLDPE / Heavy FRP & Galvanized Steel Posts",
-    specs: ["Integrated Spiral, Wave & Tunnel Slides", "Anti-Skid PVC Dipped Decks", "Modular Layout Expandable", "Safety Certified for Ages 2-12"],
+    subname: "Play Castles, Towers, Bridges & Slides",
+    category: "Playground & Park",
+    material: "FRP Slides & Galvanized Steel Posts",
+    specs: ["Combines spiral slides, bridges & towers", "Anti-slip coated platforms", "Safe for children ages 3 to 12", "Custom layout configurations"],
     image: "https://images.unsplash.com/photo-1575783970733-1aaedde1db74?auto=format&fit=crop&w=900&q=80",
-    description: "All-in-one multi-play castles and jungle towers combining climbing nets, observation decks, slides, and crawl bridges."
+    description: "Complete all-in-one outdoor play castles featuring slides, crawl tunnels, climbing nets, and observation towers."
   },
   {
     id: "nav-19",
     name: "Spiral, Wave & Roller Slides",
-    subname: "Standalone High-Strength Playground Slides",
-    category: "PLAYGROUND & PARK",
-    price: "Custom Quote",
-    material: "Heavy-Gauge UV Polymer & FRP",
-    specs: ["Heights from 4ft to 16ft", "Double-Wall Thermal Insulated", "Integrated Safety Guardrails", "Vibrant Non-Fading Colorways"],
+    subname: "Heavy-Duty Outdoor Playground Slides",
+    category: "Playground & Park",
+    material: "Durable Weatherproof Fiberglass",
+    specs: ["Heights from 4 ft to 15 ft", "High side walls for child safety", "Smooth deceleration zone at exit", "Sun-proof non-fading colors"],
     image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=900&q=80",
-    description: "Ultra-durable standalone playground slides crafted with smooth transition entries and safe deceleration runouts."
+    description: "Standalone slides for residential society parks, schools, and city gardens. Built for heavy daily use."
   },
   {
     id: "nav-20",
     name: "Seesaws & Spring Riders",
-    subname: "Dynamic Balance & Animal Springers",
-    category: "PLAYGROUND & PARK",
-    price: "Custom Quote",
-    material: "Heavy Coiled Tempered Steel & FRP",
-    specs: ["Pinch-Proof Heavy-Duty Spring Unit", "Horse, Duck, Bike & Car Shapes", "Anti-Slip Footrests & Hand Grips", "High-Impact Shock Absorption"],
+    subname: "Animal Springers & 2 to 4 Seater Seesaws",
+    category: "Playground & Park",
+    material: "Tempered Steel Springs & Fiberglass",
+    specs: ["Heavy duty pinch-proof spring", "Duck, horse, car, and fish shapes", "Anti-slip handles and footrests", "Builds balance and coordination"],
     image: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=900&q=80",
-    description: "Engaging tactile spring riders and 2-to-4 person seesaws designed for early childhood coordination and energetic play."
+    description: "Fun, spring-mounted animal rides and durable seesaws that keep younger children entertained for hours."
   },
   {
     id: "nav-21",
     name: "Merry-Go-Rounds",
-    subname: "Centrifugal Rotary Platforms",
-    category: "PLAYGROUND & PARK",
-    price: "Custom Quote",
-    material: "Heavy Bearing Steel Core & Chequered Plate",
-    specs: ["Ultra-Smooth Sealed Bearing Core", "Integrated Handrail Governance", "Speed-Regulated Braking", "Seated or Standing Formats"],
+    subname: "Smooth Rotating Playground Wheels",
+    category: "Playground & Park",
+    material: "Heavy Bearing Steel Core",
+    specs: ["Frictionless sealed heavy bearing", "Sturdy safety handrails", "Safe speed regulation", "Accommodates 4 to 8 children"],
     image: "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=900&q=80",
-    description: "Classic rotational playground equipment engineered with frictionless heavy-duty bearings for smooth, safe spinning fun."
+    description: "Classic spinning merry-go-round wheels with smooth rotation bearings and firm safety handrails."
   },
   {
     id: "nav-22",
     name: "Swing Seats & Heavy Swings",
-    subname: "Toddler, Flat & Parent-Child Duos",
-    category: "PLAYGROUND & PARK",
-    price: "Custom Quote",
-    material: "EPDM Rubber Seats & Stainless Chains",
-    specs: ["Pinch-Resistant Rubber-Coated Chains", "Heavy Structural A-Frame Posts", "High-Load Carabiner Mounts", "Anti-Wrap Swivel Assemblies"],
+    subname: "Single, Double & Toddler Bucket Swings",
+    category: "Playground & Park",
+    material: "Rubber Seats & Galvanized Chains",
+    specs: ["Rubber-coated safety chains", "High load-bearing A-frame steel", "Smooth swinging motion", "Weatherproof in sun and rain"],
     image: "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=900&q=80",
-    description: "Reliable, weather-resistant swing sets built to handle thousands of swinging hours without chain wear or structural fatigue."
+    description: "Traditional and toddler-safe swing sets built with heavy-gauge steel pipes and rubber-coated chains."
   },
   {
     id: "nav-23",
     name: "Climbers & Play Tunnels",
-    subname: "Geometric Domes, Ropes & Crawlways",
-    category: "PLAYGROUND & PARK",
-    price: "Custom Quote",
-    material: "Steel-Core Polypropylene Rope & FRP",
-    specs: ["Spiders Webs, Geodesic Nets & Tubes", "Ventilated Porthole Windows", "Develops Motor Skills & Agility", "Smooth Non-Snag Surface Joints"],
+    subname: "Geodesic Domes, Rope Nets & Crawl Tubes",
+    category: "Playground & Park",
+    material: "Steel-Core Rope & Fiberglass",
+    specs: ["Ventilated crawl tubes with windows", "Steel reinforced safety climbing rope", "Helps develop physical strength", "Smooth snag-free hardware"],
     image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=900&q=80",
-    description: "Interactive obstacle tunnels and rope climbing structures stimulating agility, exploration, and spatial coordination."
+    description: "Climbing nets, geometric domes, and crawl tunnels that encourage active play and healthy exercise for kids."
   },
   {
     id: "nav-24",
     name: "Animal-Shaped Dustbins",
     subname: "Penguin, Frog, Bear & Dolphin Bins",
-    category: "PLAYGROUND & PARK",
-    price: "Custom Quote",
-    material: "High-Strength FRP with Internal Liner",
-    specs: ["Wide Child-Friendly Open Mouths", "Internal Removable Galvanized Bin", "Encourages Cleanliness In Children", "UV & Acid-Proof Paint Coating"],
+    category: "Playground & Park",
+    material: "Tough Molded Fiberglass",
+    specs: ["Friendly wide open animal mouths", "Removable inside metal bin", "Encourages kids to keep parks clean", "Rust proof and washable"],
     image: "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?auto=format&fit=crop&w=900&q=80",
-    description: "Delightful animal dustbins that make waste disposal fun and educational in parks, schools, and amusement centres."
+    description: "Cute penguin, frog, dolphin, and bear dustbins that make waste disposal fun for kids in parks and schools."
   },
   {
     id: "nav-25",
     name: "Garden & Park Benches",
-    subname: "Cast Iron, Cast Aluminum & FRP Seating",
-    category: "PLAYGROUND & PARK",
-    price: "Custom Quote",
-    material: "Powder-Coated Metal & FRP Slats",
-    specs: ["Termite-Proof & Rot-Proof", "Heavy Anti-Theft Ground Anchor Holes", "Ergonomic Lumbar Support", "Wood-Grain Texture or Solid Colors"],
+    subname: "Outdoor Cast Iron & Fiberglass Seating",
+    category: "Playground & Park",
+    material: "Cast Iron Base with Fiberglass Slats",
+    specs: ["Termite-proof and rot-proof", "Ground anchoring holes included", "Comfortable contoured backrest", "Wood grain finish or modern colors"],
     image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=900&q=80",
-    description: "Heavy-duty outdoor seating designed for municipal walkways, university campuses, gated communities, and public gardens."
+    description: "Heavy-duty outdoor benches designed for public parks, walking tracks, societies, and hospital gardens."
   }
 ];
 
@@ -288,26 +262,25 @@ export const INITIAL_SECTIONS = [
   {
     id: "sec-hero",
     type: "hero",
-    title: "HIGH-END CRAFTSMANSHIP FOR ICONIC SPACES",
-    subtitle: "Navkar Creative Arts engineers premier architectural sculptures, theme waterpark attractions, commercial mascots, and urban playground infrastructure with museum-grade precision.",
-    badge: "NAVKAR CREATIVE ARTS // EST. 2012",
-    primaryBtn: "EXPLORE 25+ SIGNATURE DIVISIONS",
-    secondaryBtn: "REQUEST CUSTOM RFQ QUOTATION",
-    heroImage: "https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=1200&q=80",
+    title: "Handcrafted Statues, Resort Water Slides & Park Playgrounds",
+    subtitle: "Navkar Creative Arts is a premier manufacturer of fiberglass sculptures, commercial water park attractions, readymade swimming pools, and playground equipment.",
+    badge: "Navkar Creative Arts • Factory Direct",
+    primaryBtn: "View All Products",
+    secondaryBtn: "Request a Quote",
+    heroImage: "/images/media_1793273334379.jpg",
     style: {
       align: "left",
-      glowIntensity: "medium",
       padding: "large"
     }
   },
   {
-    id: "sec-hud",
-    type: "hud_metrics",
-    metrics: [
-      { label: "PRODUCT DIVISIONS", value: "25+ SYSTEMS", desc: "SCULPTURES, WATERPARK & PARKS" },
-      { label: "MATERIAL STANDARD", value: "GRADE-A FRP", desc: "WEATHERPROOF & MARINE GELCOAT" },
-      { label: "CLIENT REACH", value: "500+ PROJECTS", desc: "RESORTS, THEME PARKS & CITIES" },
-      { label: "PERFORMANCE", value: "60 FPS LITE", desc: "OPTIMIZED 1GB TO 8GB+ DEVICES" }
+    id: "sec-highlights",
+    type: "highlights_strip",
+    items: [
+      { label: "Products", value: "25+ Categories", desc: "Statues, Waterparks & Play" },
+      { label: "Material", value: "Premium Fiberglass", desc: "All-weather & waterproof" },
+      { label: "Experience", value: "Over 12 Years", desc: "Trusted by resorts & parks" },
+      { label: "Custom Work", value: "Bespoke Sizes", desc: "Made to your specifications" }
     ],
     style: {
       padding: "small"
@@ -316,25 +289,25 @@ export const INITIAL_SECTIONS = [
   {
     id: "sec-products",
     type: "products_grid",
-    title: "SIGNATURE PRODUCT CATALOG",
-    subtitle: "Explore our comprehensive range across Decorative Statues, Waterpark Systems, and Playground Architecture.",
-    filterCategory: "ALL",
+    title: "Our Product Range",
+    subtitle: "Explore our complete collection across Decorative Statues, Water Park Slides, and Playground Equipment.",
+    filterCategory: "All",
     style: {
       padding: "large",
       columns: 3
     }
   },
   {
-    id: "sec-feature-split",
-    type: "feature_split",
-    badge: "ENGINEERING EXCELLENCE",
-    title: "BUILT TO ENDURE // CRAFTED TO INSPIRE",
-    subtitle: "Every creation from Navkar Creative Arts combines aerospace-grade composite chemistry with master artisanal hand-sculpting. Engineered for zero maintenance across intense weather, chlorine immersion, and decades of public use.",
-    image: "https://images.unsplash.com/photo-1582650625119-3a31f8418b7d?auto=format&fit=crop&w=1000&q=80",
-    bullets: [
-      { title: "Museum-Grade Anatomical Sculpting", desc: "Artisans with 20+ years expertise sculpting lifelike wildlife, mascots, and parametric murals." },
-      { title: "Hydrodynamic Waterpark Engineering", desc: "Precision slide gradients, leak-free flange joints, and frictionless UV-gelcoats." },
-      { title: "Ultra-Lite 1GB Device Architecture", desc: "Website executes butter-smooth 60FPS on 1GB phones to high-resolution desktop monitors." }
+    id: "sec-about",
+    type: "about_split",
+    badge: "Why Choose Navkar",
+    title: "Exceptional Quality Built for Decades of Use",
+    subtitle: "From detailed life-size elephant sculptures to high-speed pool slides, every product is handcrafted using high grade fiberglass materials designed to withstand sun, rain, and heavy daily use.",
+    image: "/images/media_1793273334395.jpg",
+    points: [
+      { title: "Direct Factory Pricing", desc: "Get transparent quotation without middlemen or unnecessary markups." },
+      { title: "Custom Sizing & Colors", desc: "We customize dimensions, designs, and paint colors to match your site layout." },
+      { title: "Fast Pan-India Delivery", desc: "Safe packing and on-site delivery for resorts, theme parks, and institutions." }
     ],
     style: {
       padding: "large",
@@ -344,14 +317,13 @@ export const INITIAL_SECTIONS = [
   {
     id: "sec-cta",
     type: "cta_banner",
-    badge: "DIRECT FACTORY INQUIRY",
-    title: "BRING YOUR AMUSEMENT OR ARCHITECTURAL VISION TO REALITY",
-    subtitle: "Request your customized quotation token, detailed technical specifications sheet, or direct consultation with Navkar Creative Arts engineering team.",
-    buttonText: "REQUEST CATALOG & TOKEN",
-    secondaryText: "DISPATCH PROJECT RFQ",
+    badge: "Direct Workshop Inquiry",
+    title: "Looking for Custom Statues or Water Park Setup?",
+    subtitle: "Contact our workshop directly or generate a quotation token for immediate price estimates and delivery timelines.",
+    buttonText: "Request a Quote",
+    secondaryText: "Chat on WhatsApp",
     style: {
-      padding: "large",
-      glow: true
+      padding: "large"
     }
   }
 ];

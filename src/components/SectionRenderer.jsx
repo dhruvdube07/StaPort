@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
 import { 
-  IconPlus, 
   IconArrowUp, 
   IconArrowDown, 
   IconCopy, 
   IconTrash, 
   IconCart, 
-  IconZap, 
-  IconTerminal, 
-  IconCheck, 
   IconEye,
-  IconShield
+  IconCheck
 } from './Icons';
-import { sounds } from '../utils/soundEngine';
 
 export const SectionRenderer = ({ 
   section, 
@@ -29,27 +24,26 @@ export const SectionRenderer = ({
   onAddToCart, 
   onOpenModal 
 }) => {
-  const [activeCategory, setActiveCategory] = useState('ALL');
+  const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
 
   const isEditing = isEditorOpen && !previewMode;
 
   const categories = [
-    'ALL', 
-    'DECORATIVE & STATUES', 
-    'WATER PARK, RESORT & POOL', 
-    'PLAYGROUND & PARK'
+    'All', 
+    'Statues & Sculptures', 
+    'Water Park & Pool', 
+    'Playground & Park'
   ];
 
-  const marqueeItems = [
-    "ARCHITECTURAL STATUES", "FIBERGLASS WILDLIFE", "RESTAURANT MASCOTS", 
-    "WATER PARK FLUMES", "CLOSED TUBE SLIDES", "TIPPING SPLASH BUCKETS", 
-    "READYMADE FIBERGLASS POOLS", "MULTI-PLAY CASTLES", "ROLLER SLIDES", 
-    "ANIMAL-SHAPED DUSTBINS", "GRADE-A FRP COMPOSITE", "MUSEUM CRAFTSMANSHIP"
+  const marqueeWords = [
+    "Decorative Statues", "Resort Water Slides", "Fiberglass Swimming Pools", 
+    "Kids Playgrounds", "Restaurant Mascots", "Water Mushrooms", 
+    "Outdoor Park Benches", "Animal Dustbins", "Custom Sizing & Colors"
   ];
 
   const filteredProducts = products.filter((p) => {
-    const matchesCat = activeCategory === 'ALL' || p.category === activeCategory;
+    const matchesCat = activeCategory === 'All' || p.category === activeCategory;
     const matchesSearch = searchQuery === '' || 
       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.subname?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -60,7 +54,7 @@ export const SectionRenderer = ({
   return (
     <section 
       id={section.id}
-      className={`page-section section-${section.type} ${isEditing ? 'editor-section-wrapper' : ''} ${isSelected && isEditing ? 'editor-active-section' : ''}`}
+      className={`page-section section-${section.type} ${isEditing ? 'editor-section-box' : ''} ${isSelected && isEditing ? 'editor-selected' : ''}`}
       onClick={(e) => {
         if (isEditing) {
           e.stopPropagation();
@@ -68,90 +62,73 @@ export const SectionRenderer = ({
         }
       }}
       style={{
-        paddingTop: section.style?.padding === 'small' ? '28px' : section.style?.padding === 'large' ? '80px' : '50px',
-        paddingBottom: section.style?.padding === 'small' ? '28px' : section.style?.padding === 'large' ? '80px' : '50px',
+        paddingTop: section.style?.padding === 'small' ? '30px' : section.style?.padding === 'large' ? '80px' : '50px',
+        paddingBottom: section.style?.padding === 'small' ? '30px' : section.style?.padding === 'large' ? '80px' : '50px',
         textAlign: section.style?.align || 'left'
       }}
     >
-      {/* ELEMENTOR ON-CANVAS SECTION CONTROLS */}
+      {/* On-Canvas Editor Toolbar */}
       {isEditing && (
-        <div className="editor-section-handle" onClick={(e) => e.stopPropagation()}>
-          <span className="mono font-bold">:: {section.type.toUpperCase()}</span>
-          <button className="editor-h-btn" onClick={onMoveUp} title="Move Up"><IconArrowUp size={12} /></button>
-          <button className="editor-h-btn" onClick={onMoveDown} title="Move Down"><IconArrowDown size={12} /></button>
-          <button className="editor-h-btn" onClick={onDuplicate} title="Duplicate"><IconCopy size={12} /></button>
-          <button className="editor-h-btn text-danger" onClick={onDelete} title="Delete"><IconTrash size={12} /></button>
+        <div className="editor-controls-bar" onClick={(e) => e.stopPropagation()}>
+          <span className="editor-title">{section.type.replace('_', ' ').toUpperCase()}</span>
+          <button className="editor-btn" onClick={onMoveUp} title="Move Up"><IconArrowUp size={12} /></button>
+          <button className="editor-btn" onClick={onMoveDown} title="Move Down"><IconArrowDown size={12} /></button>
+          <button className="editor-btn" onClick={onDuplicate} title="Duplicate"><IconCopy size={12} /></button>
+          <button className="editor-btn text-danger" onClick={onDelete} title="Delete"><IconTrash size={12} /></button>
         </div>
       )}
 
       <div className="section-container">
         {/* ================= HERO SECTION ================= */}
         {section.type === 'hero' && (
-          <div className="lumina-hero-layout">
-            <div className="lumina-hero-content">
+          <div className="hero-grid">
+            <div className="hero-text-col">
               {section.badge && (
                 <div className="mb-3">
-                  <span className="hud-badge">
-                    <span className="hud-dot"></span>
+                  <span className="badge-pill">
                     {section.badge}
                   </span>
                 </div>
               )}
               
-              <h1 className="lumina-hero-headline font-display">
+              <h1 className="hero-title">
                 {section.title}
               </h1>
 
-              <p className="lumina-hero-subtitle">
+              <p className="hero-subtitle">
                 {section.subtitle}
               </p>
 
-              <div className="lumina-hero-cta-group">
+              <div className="hero-actions">
                 <button 
-                  className="btn btn-primary hero-btn"
+                  className="btn btn-primary"
                   onClick={() => {
-                    sounds.playSuccess();
                     document.getElementById('sec-products')?.scrollIntoView({ behavior: 'smooth' });
                   }}
                 >
-                  <IconZap size={16} />
-                  <span>{section.primaryBtn || 'EXPLORE CATALOG'}</span>
+                  {section.primaryBtn || 'Browse Products'}
                 </button>
 
                 <button 
-                  className="btn btn-cyber hero-btn"
-                  onClick={() => {
-                    sounds.playLaser();
-                    onOpenModal('contact');
-                  }}
+                  className="btn btn-secondary"
+                  onClick={() => onOpenModal('contact')}
                 >
-                  <IconTerminal size={16} />
-                  <span>{section.secondaryBtn || 'REQUEST QUOTATION'}</span>
+                  {section.secondaryBtn || 'Contact Us'}
                 </button>
-              </div>
-
-              {/* Telemetry Bar */}
-              <div className="hero-telemetry mono text-xs text-muted">
-                <span>MATERIAL: <strong className="text-accent">A-GRADE FRP</strong></span>
-                <span className="telemetry-sep">|</span>
-                <span>CATALOG: <strong className="text-main">25+ SYSTEMS</strong></span>
-                <span className="telemetry-sep">|</span>
-                <span>ENGINE: <strong className="text-accent">60FPS LITE</strong></span>
               </div>
             </div>
 
             {section.heroImage && (
-              <div className="lumina-hero-visual-wrap">
-                <div className="hero-img-box sci-fi-corners">
+              <div className="hero-image-col">
+                <div className="hero-card">
                   <img 
                     src={section.heroImage} 
-                    alt="Navkar Creative Arts Master Sculptures" 
-                    className="hero-image"
+                    alt="Navkar Creative Arts Showcase" 
+                    className="hero-img"
                     loading="eager"
                   />
-                  <div className="hero-floating-hud">
-                    <span className="mono text-xs text-accent">[NAVKAR CREATIVE ARTS]</span>
-                    <span className="mono text-xs text-muted">SCULPTURES & WATERPARKS</span>
+                  <div className="hero-img-badge">
+                    <span>Direct Workshop Manufacturer</span>
                   </div>
                 </div>
               </div>
@@ -159,26 +136,26 @@ export const SectionRenderer = ({
           </div>
         )}
 
-        {/* ================= HUD METRICS STRIP ================= */}
-        {section.type === 'hud_metrics' && (
+        {/* ================= HIGHLIGHTS STRIP ================= */}
+        {section.type === 'highlights_strip' && (
           <>
-            <div className="hud-metrics-grid">
-              {(section.metrics || []).map((m, idx) => (
-                <div key={idx} className="hud-metric-card sci-fi-corners">
-                  <div className="hud-metric-label mono text-xs text-dim">// {m.label}</div>
-                  <div className="hud-metric-value font-display">{m.value}</div>
-                  <div className="hud-metric-desc mono text-xs text-muted">{m.desc}</div>
+            <div className="highlights-grid">
+              {(section.items || []).map((m, idx) => (
+                <div key={idx} className="luxury-card highlight-card">
+                  <div className="highlight-label">{m.label}</div>
+                  <div className="highlight-value">{m.value}</div>
+                  <div className="highlight-desc">{m.desc}</div>
                 </div>
               ))}
             </div>
 
-            {/* Continuous sliding marquee ribbon (Pure CSS 60FPS) */}
-            <div className="marquee-ribbon-container mt-4">
-              <div className="marquee-track">
-                {marqueeItems.concat(marqueeItems).map((item, idx) => (
-                  <span key={idx} className="marquee-item">
-                    <span className="hud-dot"></span>
-                    <span>{item}</span>
+            {/* Continuous Clean Ribbon */}
+            <div className="clean-marquee-wrap mt-4">
+              <div className="clean-marquee-track">
+                {marqueeWords.concat(marqueeWords).map((word, idx) => (
+                  <span key={idx} className="clean-marquee-item">
+                    <span className="clean-marquee-dot"></span>
+                    <span>{word}</span>
                   </span>
                 ))}
               </div>
@@ -186,101 +163,86 @@ export const SectionRenderer = ({
           </>
         )}
 
-        {/* ================= PRODUCT SHOWCASE GRID (ALL 25 ITEMS) ================= */}
+        {/* ================= PRODUCTS GRID (ALL 25 PRODUCTS) ================= */}
         {section.type === 'products_grid' && (
-          <div className="products-section-wrap">
-            <div className="section-header-row">
+          <div className="products-container">
+            <div className="products-header">
               <div>
-                <span className="hud-badge mb-2">COMPLETE COMMERCIAL CATALOG</span>
-                <h2 className="font-display text-3xl">{section.title}</h2>
-                <p className="text-muted text-sm mt-1">{section.subtitle}</p>
+                <span className="badge-pill mb-2">Our Complete Catalog</span>
+                <h2 className="products-title">{section.title}</h2>
+                <p className="text-secondary">{section.subtitle}</p>
               </div>
 
-              {/* Instant Search Bar */}
-              <div className="catalog-search-wrap">
+              {/* Clean Instant Search */}
+              <div className="search-box-wrap">
                 <input 
                   type="text" 
-                  placeholder="Search slides, elephants, fountains, dustbins..."
-                  className="cyber-input catalog-search-input mono text-xs"
+                  placeholder="Search products (e.g. Elephant, Slide, Pool)..."
+                  className="clean-input"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
             </div>
 
-            {/* Division Filter Pills */}
-            <div className="category-filter-pills mb-4">
+            {/* Category Filter Pills */}
+            <div className="category-pills-row">
               {categories.map((cat) => (
                 <button
                   key={cat}
-                  className={`btn-glow-pill ${activeCategory === cat ? 'active' : ''}`}
-                  onClick={() => {
-                    sounds.playBlip(800);
-                    setActiveCategory(cat);
-                  }}
+                  className={`btn-pill ${activeCategory === cat ? 'active' : ''}`}
+                  onClick={() => setActiveCategory(cat)}
                 >
-                  {cat} {cat === 'ALL' ? `(${products.length})` : ''}
+                  {cat} {cat === 'All' ? `(${products.length})` : ''}
                 </button>
               ))}
             </div>
 
-            {/* Product Cards Grid */}
-            <div className="product-cards-grid">
+            {/* Products Grid */}
+            <div className="products-grid">
               {filteredProducts.map((prod) => (
-                <div key={prod.id} className="cyber-card product-card glow-hover">
-                  <div className="product-media-wrap">
+                <div key={prod.id} className="luxury-card product-card">
+                  <div className="product-image-wrap">
                     <img 
                       src={prod.image} 
                       alt={prod.name} 
-                      className="product-img"
+                      className="product-image"
                       loading="lazy" 
                     />
-                    <span className="product-stock-tag mono text-xs">
+                    <span className="product-category-tag">
                       {prod.category}
                     </span>
                     <button 
-                      className="quick-view-btn"
-                      onClick={() => {
-                        sounds.playBlip(950);
-                        onOpenQuickView(prod);
-                      }}
-                      title="View Detailed Specifications"
+                      className="quick-view-overlay-btn"
+                      onClick={() => onOpenQuickView(prod)}
+                      title="View Details"
                     >
-                      <IconEye size={14} /> TECH SPECS
+                      <IconEye size={14} /> View Details
                     </button>
                   </div>
 
-                  <div className="product-info-wrap">
-                    <div className="flex-align justify-between mb-1">
-                      <span className="mono text-xs text-accent">ID: #{prod.id}</span>
-                      <span className="mono text-xs text-dim">FRP COMPOSITE</span>
+                  <div className="product-body">
+                    <div className="product-meta">
+                      <span className="product-material">{prod.material}</span>
                     </div>
 
-                    <h3 className="product-name font-display">{prod.name}</h3>
-                    <p className="product-tagline text-xs text-muted mb-2">{prod.subname}</p>
+                    <h3 className="product-title">{prod.name}</h3>
+                    <p className="product-subtext">{prod.subname}</p>
 
-                    <div className="product-specs-preview mb-3">
-                      <span className="spec-mini-pill mono text-xs">
-                        <IconShield size={11} className="text-accent" />
-                        {prod.specs[0]}
-                      </span>
-                    </div>
-
-                    <div className="product-footer flex-align justify-between pt-2">
-                      <div className="product-price font-display text-accent text-sm">
-                        DIRECT RFQ
-                      </div>
+                    <div className="product-bottom-row">
+                      <button 
+                        className="btn btn-secondary product-view-btn"
+                        onClick={() => onOpenQuickView(prod)}
+                      >
+                        Details
+                      </button>
 
                       <button 
                         className="btn btn-primary product-add-btn"
-                        onClick={() => {
-                          sounds.playSuccess();
-                          onAddToCart(prod);
-                        }}
-                        title="Add to quotation inquiry bag"
+                        onClick={() => onAddToCart(prod)}
                       >
                         <IconCart size={14} />
-                        <span>ADD TO RFQ</span>
+                        <span>Add to Quote</span>
                       </button>
                     </div>
                   </div>
@@ -290,28 +252,27 @@ export const SectionRenderer = ({
           </div>
         )}
 
-        {/* ================= FEATURE SPLIT BLOCK ================= */}
-        {section.type === 'feature_split' && (
-          <div className={`feature-split-layout ${section.style?.imagePosition === 'left' ? 'reverse' : ''}`}>
-            <div className="feature-text-side">
+        {/* ================= ABOUT / FEATURE SPLIT ================= */}
+        {section.type === 'about_split' && (
+          <div className={`about-split-grid ${section.style?.imagePosition === 'left' ? 'reverse' : ''}`}>
+            <div className="about-text-col">
               {section.badge && (
-                <span className="hud-badge mb-3">
-                  <span className="hud-dot"></span>
+                <span className="badge-pill mb-3">
                   {section.badge}
                 </span>
               )}
-              <h2 className="font-display text-3xl mb-3">{section.title}</h2>
-              <p className="text-muted text-sm mb-4 leading-relaxed">{section.subtitle}</p>
+              <h2 className="about-title">{section.title}</h2>
+              <p className="about-desc">{section.subtitle}</p>
 
-              <div className="feature-bullets-list">
-                {(section.bullets || []).map((b, idx) => (
-                  <div key={idx} className="feature-bullet-item flex-align gap-3">
-                    <div className="bullet-icon-box">
-                      <IconCheck size={14} className="text-accent" />
+              <div className="points-list">
+                {(section.points || []).map((pt, idx) => (
+                  <div key={idx} className="point-item">
+                    <div className="point-check">
+                      <IconCheck size={14} />
                     </div>
                     <div>
-                      <h4 className="font-display text-sm text-main">{b.title}</h4>
-                      <p className="text-xs text-muted">{b.desc}</p>
+                      <h4 className="point-heading">{pt.title}</h4>
+                      <p className="point-text">{pt.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -319,12 +280,9 @@ export const SectionRenderer = ({
             </div>
 
             {section.image && (
-              <div className="feature-img-side">
-                <div className="feature-img-box sci-fi-corners">
-                  <img src={section.image} alt="Navkar Manufacturing Precision" className="feature-image" loading="lazy" />
-                  <div className="feature-floating-tag mono text-xs">
-                    NAVKAR WORKSHOP // 25+ DIVISIONS
-                  </div>
+              <div className="about-img-col">
+                <div className="about-image-card">
+                  <img src={section.image} alt="Navkar Manufacturing" className="about-image" loading="lazy" />
                 </div>
               </div>
             )}
@@ -333,206 +291,160 @@ export const SectionRenderer = ({
 
         {/* ================= CALL TO ACTION BANNER ================= */}
         {section.type === 'cta_banner' && (
-          <div className="cta-banner-card sci-fi-corners">
-            <div className="cta-banner-content">
-              {section.badge && <span className="hud-badge mb-2">{section.badge}</span>}
-              <h2 className="font-display text-3xl mb-2">{section.title}</h2>
-              <p className="text-muted text-sm max-w-xl mx-auto mb-4">{section.subtitle}</p>
-              
-              <div className="cta-action-btns flex-align justify-center gap-3">
-                <button 
-                  className="btn btn-primary"
-                  onClick={() => {
-                    sounds.playLaser();
-                    onOpenModal('request_token');
-                  }}
-                >
-                  <IconZap size={15} />
-                  <span>{section.buttonText || 'REQUEST CATALOG TOKEN'}</span>
-                </button>
-                <button 
-                  className="btn btn-cyber"
-                  onClick={() => {
-                    sounds.playLaser();
-                    onOpenModal('contact');
-                  }}
-                >
-                  <IconTerminal size={15} />
-                  <span>{section.secondaryText || 'CONTACT WORKSHOP'}</span>
-                </button>
-              </div>
+          <div className="luxury-card cta-box">
+            {section.badge && <span className="badge-pill mb-2">{section.badge}</span>}
+            <h2 className="cta-title">{section.title}</h2>
+            <p className="cta-subtitle">{section.subtitle}</p>
+            
+            <div className="cta-actions">
+              <button 
+                className="btn btn-primary"
+                onClick={() => onOpenModal('contact')}
+              >
+                {section.buttonText || 'Request a Quote'}
+              </button>
+              <a 
+                href="https://wa.me/919820012345"
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-secondary"
+              >
+                {section.secondaryText || 'Chat on WhatsApp'}
+              </a>
             </div>
-          </div>
-        )}
-
-        {/* ================= RICH TEXT / BULLETIN ================= */}
-        {section.type === 'text_block' && (
-          <div className="text-block-wrapper cyber-card sci-fi-corners max-w-2xl mx-auto">
-            {section.badge && <span className="hud-badge mb-2">{section.badge}</span>}
-            <h2 className="font-display text-2xl mb-3">{section.title}</h2>
-            <p className="text-muted text-sm leading-relaxed">{section.content}</p>
           </div>
         )}
       </div>
 
       <style>{`
         .section-container {
-          max-width: 1360px;
+          max-width: 1320px;
           margin: 0 auto;
-          padding: 0 20px;
-          position: relative;
+          padding: 0 24px;
         }
 
-        .editor-section-wrapper {
+        .editor-section-box {
           position: relative;
-          outline: 1px dashed rgba(255, 255, 255, 0.15);
-          outline-offset: -1px;
-          transition: outline-color var(--transition-fast);
+          outline: 1px dashed var(--border-mid);
         }
 
-        .editor-section-wrapper:hover {
+        .editor-section-box:hover {
           outline-color: var(--accent);
         }
 
-        .editor-section-handle {
+        .editor-controls-bar {
           position: absolute;
           top: 0;
           left: 50%;
           transform: translate(-50%, -100%);
-          background: #090b10;
-          border: 1px solid var(--accent);
-          border-bottom: none;
+          background: var(--bg-surface);
+          border: 1px solid var(--border-mid);
           padding: 4px 12px;
-          border-radius: var(--radius-xs) var(--radius-xs) 0 0;
+          border-radius: var(--radius-sm) var(--radius-sm) 0 0;
           display: flex;
           align-items: center;
           gap: 8px;
           font-size: 11px;
-          color: var(--accent);
           z-index: 100;
-          box-shadow: 0 -4px 12px rgba(0,0,0,0.5);
         }
 
-        .editor-h-btn {
-          color: var(--text-muted);
+        .editor-btn {
+          color: var(--text-secondary);
           padding: 2px;
           cursor: pointer;
         }
 
-        .editor-h-btn:hover { color: var(--text-main); }
-        .editor-h-btn.text-danger:hover { color: #f87171; }
+        .editor-btn:hover { color: var(--text-primary); }
+        .text-danger:hover { color: #ef4444; }
 
-        /* LUMINA HERO */
-        .lumina-hero-layout {
+        /* HERO */
+        .hero-grid {
           display: grid;
           grid-template-columns: 1.15fr 0.85fr;
           align-items: center;
           gap: 48px;
         }
 
-        .lumina-hero-headline {
-          font-size: clamp(2.3rem, 4.3vw, 4.1rem);
-          line-height: 1.08;
+        .hero-title {
+          font-size: clamp(2.2rem, 4vw, 3.8rem);
+          line-height: 1.12;
+          color: var(--text-primary);
           margin-bottom: 20px;
-          background: linear-gradient(180deg, #ffffff 40%, var(--text-muted) 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
         }
 
-        .lumina-hero-subtitle {
-          font-size: clamp(14px, 1.2vw, 16.5px);
-          color: var(--text-muted);
+        .hero-subtitle {
+          font-size: clamp(15px, 1.2vw, 17px);
+          color: var(--text-secondary);
           max-width: 540px;
           line-height: 1.6;
-          margin-bottom: 30px;
-        }
-
-        .lumina-hero-cta-group {
-          display: flex;
-          flex-wrap: wrap;
-          align-items: center;
-          gap: 14px;
           margin-bottom: 32px;
         }
 
-        .hero-btn {
-          padding: 12px 26px;
-          font-size: 13.5px;
-        }
-
-        .hero-telemetry {
+        .hero-actions {
           display: flex;
-          align-items: center;
+          flex-wrap: wrap;
           gap: 12px;
         }
 
-        .telemetry-sep { color: var(--border-mid); }
-
-        .lumina-hero-visual-wrap {
-          position: relative;
-        }
-
-        .hero-img-box {
+        .hero-card {
           border-radius: var(--radius-lg);
           overflow: hidden;
           background: var(--bg-card);
-          border: 1px solid var(--border-mid);
-          box-shadow: 0 20px 50px rgba(0,0,0,0.7), 0 0 35px var(--accent-subtle);
+          border: 1px solid var(--border-subtle);
+          box-shadow: var(--card-shadow);
           position: relative;
         }
 
-        .hero-image {
+        .hero-img {
           width: 100%;
-          height: 500px;
+          height: 480px;
           object-fit: cover;
-          display: block;
-          filter: contrast(1.05) saturate(1.1);
         }
 
-        .hero-floating-hud {
+        .hero-img-badge {
           position: absolute;
           bottom: 16px;
           left: 16px;
-          right: 16px;
-          background: rgba(9, 10, 15, 0.85);
-          backdrop-filter: var(--backdrop-blur);
-          border: 1px solid var(--border-bright);
-          padding: 10px 14px;
-          border-radius: var(--radius-sm);
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
+          background: var(--bg-surface);
+          padding: 8px 14px;
+          border-radius: var(--radius-full);
+          font-size: 12px;
+          font-weight: 600;
+          border: 1px solid var(--border-subtle);
         }
 
-        /* HUD METRICS */
-        .hud-metrics-grid {
+        /* HIGHLIGHTS */
+        .highlights-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
           gap: 16px;
         }
 
-        .hud-metric-card {
-          background: var(--bg-card);
-          border: 1px solid var(--border-dim);
-          border-radius: var(--radius-sm);
-          padding: 20px;
-          transition: border-color var(--transition-fast);
+        .highlight-card {
+          padding: 24px;
         }
 
-        .hud-metric-card:hover {
-          border-color: var(--accent);
+        .highlight-label {
+          font-size: 12px;
+          color: var(--text-muted);
+          text-transform: uppercase;
+          font-weight: 600;
         }
 
-        .hud-metric-value {
-          font-size: 30px;
-          font-weight: 800;
-          color: #ffffff;
+        .highlight-value {
+          font-size: 24px;
+          font-weight: 700;
+          color: var(--text-primary);
           margin: 6px 0;
-          letter-spacing: -0.02em;
         }
 
-        /* PRODUCTS GRID */
-        .section-header-row {
+        .highlight-desc {
+          font-size: 13px;
+          color: var(--text-secondary);
+        }
+
+        /* PRODUCTS */
+        .products-header {
           display: flex;
           align-items: flex-end;
           justify-content: space-between;
@@ -541,24 +453,27 @@ export const SectionRenderer = ({
           margin-bottom: 24px;
         }
 
-        .catalog-search-wrap {
+        .products-title {
+          font-size: clamp(24px, 3vw, 36px);
+          color: var(--text-primary);
+          margin-bottom: 4px;
+        }
+
+        .search-box-wrap {
           width: 100%;
-          max-width: 360px;
+          max-width: 340px;
         }
 
-        .catalog-search-input {
-          padding: 10px 14px;
-        }
-
-        .category-filter-pills {
+        .category-pills-row {
           display: flex;
           flex-wrap: wrap;
           gap: 8px;
+          margin-bottom: 28px;
         }
 
-        .product-cards-grid {
+        .products-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
           gap: 24px;
         }
 
@@ -567,50 +482,50 @@ export const SectionRenderer = ({
           border-radius: var(--radius-md);
         }
 
-        .product-media-wrap {
+        .product-image-wrap {
           position: relative;
+          height: 270px;
           overflow: hidden;
-          background: #090c12;
-          height: 290px;
+          background: var(--bg-card-hover);
         }
 
-        .product-img {
+        .product-image {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: transform 0.4s ease;
         }
 
-        .product-card:hover .product-img {
-          transform: scale(1.05);
+        .product-card:hover .product-image {
+          transform: scale(1.04);
         }
 
-        .product-stock-tag {
+        .product-category-tag {
           position: absolute;
           top: 12px;
           left: 12px;
-          background: rgba(0,0,0,0.75);
-          backdrop-filter: var(--backdrop-blur);
-          border: 1px solid var(--border-dim);
-          padding: 4px 8px;
-          border-radius: var(--radius-xs);
-          color: var(--accent);
+          background: var(--bg-surface);
+          border: 1px solid var(--border-subtle);
+          padding: 4px 10px;
+          border-radius: var(--radius-full);
+          font-size: 11px;
+          font-weight: 600;
+          color: var(--text-secondary);
         }
 
-        .quick-view-btn {
+        .quick-view-overlay-btn {
           position: absolute;
           bottom: 12px;
           left: 50%;
-          transform: translate(-50%, 20px);
+          transform: translate(-50%, 15px);
           opacity: 0;
-          background: rgba(9, 10, 15, 0.9);
-          backdrop-filter: var(--backdrop-blur);
-          border: 1px solid var(--accent);
-          color: var(--accent);
-          padding: 7px 16px;
+          background: var(--bg-surface);
+          border: 1px solid var(--border-mid);
+          color: var(--text-primary);
+          padding: 8px 16px;
           border-radius: var(--radius-full);
-          font-family: var(--font-mono);
-          font-size: 11px;
+          font-size: 12px;
+          font-weight: 600;
           display: flex;
           align-items: center;
           gap: 6px;
@@ -618,127 +533,165 @@ export const SectionRenderer = ({
           transition: all var(--transition-smooth);
         }
 
-        .product-card:hover .quick-view-btn {
+        .product-card:hover .quick-view-overlay-btn {
           transform: translate(-50%, 0);
           opacity: 1;
         }
 
-        .product-info-wrap {
+        .product-body {
           padding: 20px;
         }
 
-        .product-name {
-          font-size: 17px;
-          font-weight: 700;
-          color: #ffffff;
+        .product-material {
+          font-size: 11px;
+          color: var(--text-muted);
+          font-weight: 600;
+          text-transform: uppercase;
         }
 
-        .product-specs-preview {
+        .product-title {
+          font-size: 18px;
+          font-weight: 700;
+          color: var(--text-primary);
+          margin: 4px 0 2px;
+          font-family: var(--font-sans);
+        }
+
+        .product-subtext {
+          font-size: 13px;
+          color: var(--text-secondary);
+          margin-bottom: 16px;
+        }
+
+        .product-bottom-row {
           display: flex;
           align-items: center;
-          gap: 6px;
+          gap: 8px;
+          border-top: 1px solid var(--border-subtle);
+          padding-top: 14px;
         }
 
-        .spec-mini-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 4px;
-          color: var(--text-muted);
-          background: rgba(255, 255, 255, 0.03);
-          padding: 3px 8px;
-          border-radius: var(--radius-xs);
-          border: 1px solid var(--border-dim);
+        .product-view-btn {
+          padding: 8px 14px;
+          font-size: 12.5px;
         }
 
         .product-add-btn {
-          padding: 8px 16px;
-          font-size: 12px;
-          border-radius: var(--radius-sm);
+          flex: 1;
+          padding: 8px 14px;
+          font-size: 12.5px;
         }
 
-        /* FEATURE SPLIT */
-        .feature-split-layout {
+        /* ABOUT SPLIT */
+        .about-split-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
           align-items: center;
           gap: 48px;
         }
 
-        .feature-split-layout.reverse {
+        .about-split-grid.reverse {
           direction: rtl;
         }
 
-        .feature-split-layout.reverse > * {
+        .about-split-grid.reverse > * {
           direction: ltr;
         }
 
-        .feature-img-box {
-          border-radius: var(--radius-lg);
-          overflow: hidden;
-          border: 1px solid var(--border-dim);
-          box-shadow: var(--card-shadow);
-          position: relative;
+        .about-title {
+          font-size: clamp(24px, 3vw, 36px);
+          margin-bottom: 16px;
         }
 
-        .feature-image {
-          width: 100%;
-          height: 420px;
-          object-fit: cover;
+        .about-desc {
+          color: var(--text-secondary);
+          margin-bottom: 24px;
+          line-height: 1.6;
         }
 
-        .feature-floating-tag {
-          position: absolute;
-          top: 14px;
-          right: 14px;
-          background: rgba(9, 10, 15, 0.85);
-          border: 1px solid var(--accent);
-          color: var(--accent);
-          padding: 4px 10px;
-          border-radius: var(--radius-xs);
-        }
-
-        .feature-bullets-list {
+        .points-list {
           display: flex;
           flex-direction: column;
           gap: 16px;
         }
 
-        .bullet-icon-box {
-          width: 28px;
-          height: 28px;
+        .point-item {
+          display: flex;
+          gap: 14px;
+          align-items: flex-start;
+        }
+
+        .point-check {
+          width: 24px;
+          height: 24px;
           border-radius: 50%;
           background: var(--accent-subtle);
-          border: 1px solid var(--accent);
+          color: var(--accent);
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
+          margin-top: 2px;
         }
 
-        /* CTA BANNER */
-        .cta-banner-card {
-          background: linear-gradient(135deg, rgba(241, 90, 36, 0.09) 0%, rgba(18, 20, 28, 0.95) 100%);
-          border: 1px solid var(--accent);
+        .point-heading {
+          font-size: 15px;
+          font-weight: 700;
+          color: var(--text-primary);
+        }
+
+        .point-text {
+          font-size: 13px;
+          color: var(--text-secondary);
+        }
+
+        .about-image-card {
           border-radius: var(--radius-lg);
-          padding: 60px 24px;
-          text-align: center;
-          box-shadow: 0 0 50px var(--accent-subtle);
+          overflow: hidden;
+          box-shadow: var(--card-shadow);
         }
 
-        .max-w-xl { max-width: 580px; }
-        .max-w-2xl { max-width: 680px; }
-        .mx-auto { margin-left: auto; margin-right: auto; }
-        .leading-relaxed { line-height: 1.7; }
-        .text-3xl { font-size: clamp(24px, 3.2vw, 36px); }
-        .text-2xl { font-size: 22px; }
+        .about-image {
+          width: 100%;
+          height: 420px;
+          object-fit: cover;
+        }
+
+        /* CTA */
+        .cta-box {
+          text-align: center;
+          padding: 60px 24px;
+        }
+
+        .cta-title {
+          font-size: clamp(24px, 3vw, 36px);
+          margin-bottom: 12px;
+        }
+
+        .cta-subtitle {
+          color: var(--text-secondary);
+          max-width: 580px;
+          margin: 0 auto 24px;
+        }
+
+        .cta-actions {
+          display: flex;
+          justify-content: center;
+          gap: 12px;
+        }
+
+        .mt-4 { margin-top: 16px; }
+        .mb-2 { margin-bottom: 8px; }
+        .mb-3 { margin-bottom: 12px; }
+        .text-secondary { color: var(--text-secondary); }
 
         @media (max-width: 900px) {
-          .lumina-hero-layout { grid-template-columns: 1fr; gap: 32px; }
-          .hero-image { height: 360px; }
-          .feature-split-layout { grid-template-columns: 1fr; gap: 32px; }
-          .feature-split-layout.reverse { direction: ltr; }
-          .section-header-row { flex-direction: column; align-items: flex-start; }
-          .catalog-search-wrap { max-width: 100%; }
+          .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+          .hero-img { height: 340px; }
+          .about-split-grid { grid-template-columns: 1fr; gap: 32px; }
+          .about-split-grid.reverse { direction: ltr; }
+          .products-header { flex-direction: column; align-items: flex-start; }
+          .search-box-wrap { max-width: 100%; }
         }
       `}</style>
     </section>

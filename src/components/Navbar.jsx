@@ -5,10 +5,8 @@ import {
   IconSliders, 
   IconCart, 
   IconEdit, 
-  IconZap, 
   IconClose 
 } from './Icons';
-import { sounds } from '../utils/soundEngine';
 
 export const Navbar = ({ 
   onOpenModal, 
@@ -16,177 +14,174 @@ export const Navbar = ({
   onOpenCart, 
   isAdminLoggedIn, 
   isEditorOpen, 
-  onToggleEditor 
+  onToggleEditor,
+  activeTheme,
+  onToggleTheme
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleAction = (modalName) => {
-    sounds.playLaser();
     onOpenModal(modalName);
     setMobileMenuOpen(false);
   };
 
   return (
-    <header className="lumina-navbar-wrapper">
-      <div className="lumina-navbar-inner">
-        {/* Brand Logo - Navkar Creative Arts */}
+    <header className="clean-navbar">
+      <div className="navbar-container">
+        {/* Brand */}
         <div className="navbar-brand" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-          <div className="brand-hex">
-            <svg width="24" height="24" viewBox="0 0 100 100">
-              <polygon points="50,4 96,27 96,73 50,96 4,73 4,27" fill="none" stroke="var(--accent)" strokeWidth="9"/>
-              <path d="M30,30 L50,70 L70,30" fill="none" stroke="var(--accent)" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+          <div className="brand-mark">N</div>
+          <div className="brand-titles">
+            <span className="brand-main">Navkar</span>
+            <span className="brand-sub">Creative Arts</span>
           </div>
-          <div className="brand-text">
-            <span className="brand-title">NAVKAR</span>
-            <span className="brand-sub mono">// CREATIVE ARTS</span>
-          </div>
-          <span className="hud-badge hide-mobile">
-            <span className="hud-dot"></span>
-            FRP 2026
-          </span>
         </div>
 
-        {/* 3 CORE ACTIONS (Lumina Floating Pill Buttons) */}
+        {/* 3 Main Action Buttons + Theme Switcher (Desktop) */}
         <div className="navbar-actions hide-mobile">
-          {/* Button 1: Contact & RFQ */}
+          {/* Button 1: Contact */}
           <button 
             id="nav-btn-contact"
-            className="btn btn-cyber lumina-nav-pill" 
+            className="btn btn-secondary nav-action-btn" 
             onClick={() => handleAction('contact')}
-            title="Request Direct Quotation / Contact Workshop"
           >
-            <IconMail size={14} />
-            <span>01 // CONTACT & RFQ</span>
+            <IconMail size={15} />
+            <span>Contact Us</span>
           </button>
 
-          {/* Button 2: Request Token / Catalog */}
+          {/* Button 2: Request Quote / Token */}
           <button 
             id="nav-btn-token"
-            className="btn btn-cyber lumina-nav-pill" 
+            className="btn btn-secondary nav-action-btn" 
             onClick={() => handleAction('request_token')}
-            title="Generate Catalog Access Token or Request Custom Design"
           >
-            <IconKey size={14} />
-            <span>02 // REQUEST TOKEN</span>
+            <IconKey size={15} />
+            <span>Request Quote / Token</span>
           </button>
 
-          {/* Button 3: Settings & Admin */}
+          {/* Button 3: Settings */}
           <button 
             id="nav-btn-settings"
-            className="btn btn-cyber lumina-nav-pill" 
+            className="btn btn-secondary nav-action-btn" 
             onClick={() => handleAction('settings')}
-            title="Configure Visual Theme, 1GB Perf Mode & Admin Sign-in"
           >
-            <IconSliders size={14} />
-            <span>03 // SETTINGS</span>
+            <IconSliders size={15} />
+            <span>Settings</span>
           </button>
 
-          {/* Admin Elementor Launcher (Visible when authenticated) */}
+          {/* Admin Studio Trigger (when logged in) */}
           {isAdminLoggedIn && (
             <button 
               id="nav-btn-elementor"
-              className={`btn ${isEditorOpen ? 'btn-primary' : 'btn-cyber'} lumina-nav-pill editor-trigger-glow`}
-              onClick={() => {
-                sounds.playSuccess();
-                onToggleEditor();
-              }}
-              title="Launch Desktop Elementor Visual Studio"
+              className={`btn ${isEditorOpen ? 'btn-primary' : 'btn-secondary'} nav-action-btn admin-studio-btn`}
+              onClick={onToggleEditor}
             >
               <IconEdit size={14} />
-              <span>{isEditorOpen ? 'CLOSE STUDIO' : '⚡ ELEMENTOR STUDIO'}</span>
+              <span>{isEditorOpen ? 'Close Editor' : 'Visual Page Editor'}</span>
             </button>
           )}
+
+          {/* One-Click Theme Switcher (Black / White) */}
+          <button 
+            className="btn btn-ghost theme-toggle-btn"
+            onClick={onToggleTheme}
+            title={`Switch to ${activeTheme === 'dark' ? 'Light' : 'Dark'} Mode`}
+          >
+            {activeTheme === 'dark' ? '☀ Light' : '☾ Dark'}
+          </button>
         </div>
 
         {/* Right side: Quote Basket & Mobile Toggle */}
         <div className="navbar-right">
           <button 
             id="nav-btn-cart"
-            className="btn btn-cyber quote-basket-btn" 
-            onClick={() => {
-              sounds.playBlip(900);
-              onOpenCart();
-            }}
-            title="View Selected Quote Inquiries"
+            className="btn btn-secondary cart-trigger-btn" 
+            onClick={onOpenCart}
+            title="View Quote List"
           >
-            <IconCart size={17} />
-            <span className="mono text-xs hide-mobile">QUOTE LIST</span>
+            <IconCart size={16} />
+            <span className="hide-mobile">Quote List</span>
             {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
           </button>
 
-          {/* Mobile hamburger */}
+          {/* Hamburger toggle for mobile */}
           <button 
-            className="mobile-toggle-btn show-mobile" 
+            className="btn btn-secondary mobile-menu-btn show-mobile" 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle navigation menu"
+            aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <IconClose size={20} /> : <IconZap size={20} />}
+            {mobileMenuOpen ? <IconClose size={18} /> : '☰'}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="mobile-menu-drawer show-mobile">
-          <div className="mobile-menu-content">
-            <div className="mobile-menu-label mono">// NAVKAR CREATIVE ARTS</div>
-            <button 
-              className="btn btn-cyber w-full mb-3 text-xs" 
-              onClick={() => handleAction('contact')}
-            >
-              <IconMail size={15} /> 01 // CONTACT & DIRECT RFQ
-            </button>
-            <button 
-              className="btn btn-cyber w-full mb-3 text-xs" 
-              onClick={() => handleAction('request_token')}
-            >
-              <IconKey size={15} /> 02 // REQUEST TOKEN & SPEC SHEET
-            </button>
-            <button 
-              className="btn btn-cyber w-full mb-3 text-xs" 
-              onClick={() => handleAction('settings')}
-            >
-              <IconSliders size={15} /> 03 // SETTINGS & ADMIN PORTAL
-            </button>
+        <div className="mobile-dropdown show-mobile">
+          <button 
+            className="btn btn-secondary w-full mb-2 text-left" 
+            onClick={() => handleAction('contact')}
+          >
+            <IconMail size={16} /> Contact Us
+          </button>
+          <button 
+            className="btn btn-secondary w-full mb-2 text-left" 
+            onClick={() => handleAction('request_token')}
+          >
+            <IconKey size={16} /> Request Quote / Token
+          </button>
+          <button 
+            className="btn btn-secondary w-full mb-2 text-left" 
+            onClick={() => handleAction('settings')}
+          >
+            <IconSliders size={16} /> Settings
+          </button>
 
-            {isAdminLoggedIn && (
-              <button 
-                className="btn btn-primary w-full text-xs"
-                onClick={() => {
-                  sounds.playSuccess();
-                  onToggleEditor();
-                  setMobileMenuOpen(false);
-                }}
-              >
-                <IconEdit size={15} /> ⚡ ELEMENTOR STUDIO
-              </button>
-            )}
-          </div>
+          {isAdminLoggedIn && (
+            <button 
+              className="btn btn-primary w-full mb-2"
+              onClick={() => {
+                onToggleEditor();
+                setMobileMenuOpen(false);
+              }}
+            >
+              <IconEdit size={16} /> Visual Page Editor
+            </button>
+          )}
+
+          <button 
+            className="btn btn-ghost w-full mt-2" 
+            onClick={() => {
+              onToggleTheme();
+              setMobileMenuOpen(false);
+            }}
+          >
+            {activeTheme === 'dark' ? 'Switch to Light Mode ☀' : 'Switch to Dark Mode ☾'}
+          </button>
         </div>
       )}
 
       <style>{`
-        .lumina-navbar-wrapper {
+        .clean-navbar {
           position: sticky;
           top: 0;
           left: 0;
           width: 100%;
           z-index: 500;
-          background: rgba(9, 10, 15, 0.88);
-          backdrop-filter: var(--backdrop-blur);
-          border-bottom: 1px solid var(--border-dim);
-          transition: background var(--transition-fast);
+          background: var(--header-bg);
+          backdrop-filter: blur(12px);
+          border-bottom: 1px solid var(--border-subtle);
+          transition: background 0.3s ease, border-color 0.3s ease;
         }
 
-        .lumina-navbar-inner {
-          max-width: 1360px;
+        .navbar-container {
+          max-width: 1320px;
           margin: 0 auto;
-          height: 68px;
+          height: 70px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 0 20px;
+          padding: 0 24px;
           gap: 16px;
         }
 
@@ -195,36 +190,41 @@ export const Navbar = ({
           align-items: center;
           gap: 12px;
           cursor: pointer;
-          user-select: none;
         }
 
-        .brand-hex {
-          width: 32px;
-          height: 32px;
+        .brand-mark {
+          width: 36px;
+          height: 36px;
+          border-radius: 8px;
+          background: var(--text-primary);
+          color: var(--bg-main);
+          font-weight: 800;
+          font-size: 18px;
           display: flex;
           align-items: center;
           justify-content: center;
-          animation: float 4s ease-in-out infinite;
+          font-family: var(--font-heading);
         }
 
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-3px); }
+        .brand-titles {
+          display: flex;
+          flex-direction: column;
         }
 
-        .brand-title {
-          font-family: var(--font-display);
-          font-size: 19px;
-          font-weight: 800;
-          letter-spacing: 0.08em;
-          color: #ffffff;
+        .brand-main {
+          font-family: var(--font-heading);
+          font-size: 20px;
+          font-weight: 700;
+          letter-spacing: -0.01em;
+          color: var(--text-primary);
+          line-height: 1.1;
         }
 
         .brand-sub {
-          font-size: 11px;
-          color: var(--accent);
-          margin-left: 6px;
-          letter-spacing: 0.08em;
+          font-size: 12px;
+          color: var(--text-secondary);
+          font-weight: 500;
+          letter-spacing: 0.02em;
         }
 
         .navbar-actions {
@@ -233,18 +233,22 @@ export const Navbar = ({
           gap: 10px;
         }
 
-        .lumina-nav-pill {
-          padding: 8px 14px;
-          font-size: 11.5px;
-          font-family: var(--font-mono);
-          letter-spacing: 0.04em;
-          border-radius: var(--radius-sm);
+        .nav-action-btn {
+          padding: 8px 16px;
+          font-size: 13px;
+          border-radius: var(--radius-full);
         }
 
-        .editor-trigger-glow {
+        .admin-studio-btn {
           border-color: var(--accent);
-          box-shadow: 0 0 15px var(--accent-subtle);
           font-weight: 700;
+        }
+
+        .theme-toggle-btn {
+          font-size: 13px;
+          padding: 8px 14px;
+          border-radius: var(--radius-full);
+          font-weight: 600;
         }
 
         .navbar-right {
@@ -253,72 +257,46 @@ export const Navbar = ({
           gap: 10px;
         }
 
-        .quote-basket-btn {
+        .cart-trigger-btn {
           position: relative;
-          padding: 8px 14px;
-          border-radius: var(--radius-sm);
-          display: flex;
-          align-items: center;
-          gap: 8px;
+          border-radius: var(--radius-full);
+          padding: 8px 16px;
+          font-size: 13px;
         }
 
         .cart-badge {
-          position: absolute;
-          top: -4px;
-          right: -4px;
           background: var(--accent);
           color: var(--accent-text);
           font-size: 11px;
-          font-weight: 800;
-          font-family: var(--font-mono);
+          font-weight: 700;
           width: 18px;
           height: 18px;
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 0 8px var(--accent);
+          margin-left: 4px;
         }
 
-        .mobile-toggle-btn {
-          background: var(--bg-card);
-          border: 1px solid var(--border-mid);
-          color: var(--text-main);
-          padding: 8px;
-          border-radius: var(--radius-sm);
-          cursor: pointer;
-        }
-
-        .mobile-menu-drawer {
+        .mobile-dropdown {
           background: var(--bg-surface);
           border-bottom: 1px solid var(--border-mid);
-          padding: 16px 20px 24px;
-          animation: slideDown 0.2s ease-out;
+          padding: 16px 24px 20px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
-        .mobile-menu-label {
-          font-size: 11px;
-          color: var(--accent);
-          margin-bottom: 12px;
-          letter-spacing: 0.1em;
-        }
-
+        .text-left { justify-content: flex-start; }
         .w-full { width: 100%; }
-        .mb-3 { margin-bottom: 12px; }
+        .mb-2 { margin-bottom: 8px; }
+        .mt-2 { margin-top: 8px; }
 
-        @media (min-width: 900px) {
-          .hide-desktop { display: none !important; }
+        @media (min-width: 960px) {
           .show-mobile { display: none !important; }
         }
 
-        @media (max-width: 899px) {
+        @media (max-width: 959px) {
           .hide-mobile { display: none !important; }
           .show-mobile { display: block; }
-        }
-
-        @keyframes slideDown {
-          from { opacity: 0; transform: translateY(-10px); }
-          to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
     </header>

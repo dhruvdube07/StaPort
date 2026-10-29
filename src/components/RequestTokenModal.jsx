@@ -1,235 +1,148 @@
 import React, { useState } from 'react';
-import { 
-  IconKey, 
-  IconClose, 
-  IconCheck, 
-  IconCopy, 
-  IconZap, 
-  IconTerminal, 
-  IconCpu 
-} from './Icons';
-import { sounds } from '../utils/soundEngine';
+import { IconKey, IconClose, IconCheck, IconCopy, IconZap } from './Icons';
 
 export const RequestTokenModal = ({ isOpen, onClose }) => {
-  const [activeTab, setActiveTab] = useState('token'); // 'token' | 'update'
+  const [activeTab, setActiveTab] = useState('token');
   
-  // Token Generator state
-  const [generatedToken, setGeneratedToken] = useState('NAVKAR-CATALOG-9842-VIP');
-  const [tokenTier, setTokenTier] = useState('TRADE_ARCHITECT');
+  // Quote Token State
+  const [token, setToken] = useState('NAVKAR-QUOTE-8421');
   const [copied, setCopied] = useState(false);
-  const [isGenerating, setIsGenerating] = useState(false);
 
-  // Update Request state
-  const [updateType, setUpdateType] = useState('BESPOKE_SCULPTURE');
-  const [updateTitle, setUpdateTitle] = useState('');
-  const [updateDetails, setUpdateDetails] = useState('');
-  const [updateSubmitted, setUpdateSubmitted] = useState(false);
+  // Custom Request State
+  const [requestTitle, setRequestTitle] = useState('');
+  const [requestDetails, setRequestDetails] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
   if (!isOpen) return null;
 
-  const handleGenerateNewToken = () => {
-    sounds.playLaser();
-    setIsGenerating(true);
-    setTimeout(() => {
-      const randHex = () => Math.random().toString(36).substring(2, 6).toUpperCase();
-      const newToken = `NAVKAR-${randHex()}-${tokenTier.slice(0, 5)}-${randHex()}`;
-      setGeneratedToken(newToken);
-      setIsGenerating(false);
-      sounds.playSuccess();
-    }, 600);
+  const handleGenerateNew = () => {
+    const randomNum = Math.floor(1000 + Math.random() * 9000);
+    setToken(`NAVKAR-QUOTE-${randomNum}`);
   };
 
-  const handleCopyToken = () => {
-    sounds.playBlip(1000);
-    navigator.clipboard.writeText(generatedToken);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(token);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleSubmitUpdate = (e) => {
+  const handleSubmitRequest = (e) => {
     e.preventDefault();
-    sounds.playLaser();
-    setUpdateSubmitted(true);
-    sounds.playSuccess();
+    setSubmitted(true);
   };
+
+  const whatsappTokenUrl = `https://wa.me/919820012345?text=${encodeURIComponent(`Hello Navkar Creative Arts, my Quote Reference Token is ${token}. Please share your pricing list and catalogs.`)}`;
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-dialog sci-fi-corners" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
-          <div className="flex-align gap-2">
-            <span className="hud-dot"></span>
-            <span className="mono text-accent">[02 // REQUEST TOKEN & CUSTOM DESIGN]</span>
-          </div>
-          <button className="btn-ghost p-1" onClick={onClose} aria-label="Close dialog">
+          <h3 className="font-heading text-lg">Request a Quote or Custom Design</h3>
+          <button className="btn-ghost p-1" onClick={onClose} aria-label="Close">
             <IconClose size={18} />
           </button>
         </div>
 
-        {/* Tab switcher */}
-        <div className="token-modal-tabs">
+        {/* Tab switch */}
+        <div className="modal-tabs">
           <button 
-            className={`token-tab-btn ${activeTab === 'token' ? 'active' : ''}`}
-            onClick={() => {
-              sounds.playBlip(750);
-              setActiveTab('token');
-            }}
+            className={`tab-btn ${activeTab === 'token' ? 'active' : ''}`}
+            onClick={() => setActiveTab('token')}
           >
-            <IconKey size={14} />
-            <span>MINT CATALOG TOKEN</span>
+            Quote Reference Token
           </button>
           <button 
-            className={`token-tab-btn ${activeTab === 'update' ? 'active' : ''}`}
-            onClick={() => {
-              sounds.playBlip(750);
-              setActiveTab('update');
-            }}
+            className={`tab-btn ${activeTab === 'custom' ? 'active' : ''}`}
+            onClick={() => setActiveTab('custom')}
           >
-            <IconCpu size={14} />
-            <span>BESPOKE DESIGN REQUEST</span>
+            Request Custom Design
           </button>
         </div>
 
         <div className="modal-body">
           {activeTab === 'token' ? (
-            <div className="token-generator-view">
-              <p className="text-muted text-sm mb-4">
-                Navkar Access Tokens provide digital clearance to download technical 3D CAD step files, high-resolution finish swatches, and trade wholesale discount brackets.
+            <div className="token-view">
+              <p className="text-secondary text-sm mb-4">
+                You can use this reference token when calling or messaging us on WhatsApp to quickly track your quotation and get direct wholesale pricing.
               </p>
 
-              <div className="form-group mb-3">
-                <label className="form-label">CLIENT / TIER CLEARANCE</label>
-                <div className="tier-pills">
-                  {['TRADE_ARCHITECT', 'RESORT_DEVELOPER', 'CONTRACTOR_VIP'].map((tier) => (
-                    <button
-                      key={tier}
-                      type="button"
-                      className={`tier-pill ${tokenTier === tier ? 'active' : ''}`}
-                      onClick={() => {
-                        sounds.playBlip(800);
-                        setTokenTier(tier);
-                      }}
-                    >
-                      {tier}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Glowing Token Output Box */}
               <div className="token-display-box mb-4">
-                <div className="token-header flex-align justify-between">
-                  <span className="mono text-xs text-accent">AUTHORIZED ACCESS TOKEN</span>
-                  <span className="hud-badge text-xs">ACTIVE</span>
-                </div>
-                <div className="token-string mono">{generatedToken}</div>
-                <div className="token-actions flex-align gap-2 mt-3">
-                  <button 
-                    className="btn btn-primary flex-1 py-2 text-xs" 
-                    onClick={handleCopyToken}
-                  >
+                <div className="text-secondary text-xs font-semibold uppercase mb-1">Your Quote Reference Code</div>
+                <div className="token-code">{token}</div>
+                <div className="flex-align gap-2 mt-3">
+                  <button className="btn btn-secondary flex-1 py-2 text-xs" onClick={handleCopy}>
                     {copied ? (
                       <>
-                        <IconCheck size={14} />
-                        <span>COPIED TO CLIPBOARD</span>
+                        <IconCheck size={14} /> Copied!
                       </>
                     ) : (
                       <>
-                        <IconCopy size={14} />
-                        <span>COPY TOKEN</span>
+                        <IconCopy size={14} /> Copy Code
                       </>
                     )}
                   </button>
-                  <button 
-                    className="btn btn-cyber py-2 text-xs" 
-                    onClick={handleGenerateNewToken}
-                    disabled={isGenerating}
-                  >
-                    <IconZap size={14} />
-                    <span>{isGenerating ? 'MINTING...' : 'RE-MINT'}</span>
+                  <button className="btn btn-ghost py-2 text-xs" onClick={handleGenerateNew}>
+                    <IconZap size={14} /> New Code
                   </button>
                 </div>
               </div>
 
-              <div className="token-specs-card">
-                <div className="mono text-xs text-dim mb-1">// ACCESS PERMISSIONS</div>
-                <div className="grid-2 text-xs mono text-muted">
-                  <div>CAD BLUEPRINTS: <span className="text-main">UNLOCKED</span></div>
-                  <div>FACTORY VISITS: <span className="text-main">PRIORITY</span></div>
-                  <div>PRICE SCHEDULE: <span className="text-main">WHOLESALE</span></div>
-                  <div>STATUS: <span className="text-accent">VERIFIED</span></div>
-                </div>
-              </div>
+              <a 
+                href={whatsappTokenUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-primary w-full py-3 text-center"
+              >
+                Send Code via WhatsApp to Get Price
+              </a>
             </div>
           ) : (
-            <div className="update-request-view">
-              {updateSubmitted ? (
+            <div className="custom-view">
+              {submitted ? (
                 <div className="text-center py-4">
-                  <div className="success-icon-wrap">
+                  <div className="success-circle">
                     <IconCheck size={32} />
                   </div>
-                  <h3 className="font-display mb-2">CUSTOM DESIGN BRIEF RECEIVED</h3>
-                  <p className="text-muted text-sm mb-4">
-                    Tracking ID: <span className="mono text-accent">#DES-{Math.floor(1000 + Math.random() * 9000)}</span>. Our 3D clay modeling studio has received your brief.
+                  <h3 className="font-heading text-lg mb-2">Request Received!</h3>
+                  <p className="text-secondary text-sm mb-4">
+                    Our 3D modeling and engineering team has received your concept. We will get in touch with you shortly.
                   </p>
-                  <button 
-                    className="btn btn-cyber w-full"
-                    onClick={() => {
-                      setUpdateSubmitted(false);
-                      setUpdateTitle('');
-                      setUpdateDetails('');
-                    }}
-                  >
-                    SUBMIT ANOTHER PROPOSAL
+                  <button className="btn btn-secondary w-full" onClick={() => setSubmitted(false)}>
+                    Submit Another Request
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmitUpdate}>
-                  <p className="text-muted text-sm mb-4">
-                    Require a custom animal mascot, unique water slide trajectory, or specialized architectural mural? Detail your vision here.
+                <form onSubmit={handleSubmitRequest}>
+                  <p className="text-secondary text-sm mb-3">
+                    Want a specific animal statue, unique water park slide shape, or custom playground combination?
                   </p>
 
                   <div className="form-group mb-3">
-                    <label className="form-label">PROJECT TYPE</label>
-                    <select 
-                      className="cyber-input"
-                      value={updateType}
-                      onChange={(e) => setUpdateType(e.target.value)}
-                    >
-                      <option value="BESPOKE_SCULPTURE">CUSTOM SCULPTURE / MASCOT DESIGN</option>
-                      <option value="WATERPARK_LAYOUT">TURNKEY WATER PARK FLUME ENGINEERING</option>
-                      <option value="PLAYGROUND_CUSTOM">THEMATIC PLAYGROUND ARCHITECTURE</option>
-                      <option value="CATALOG_ADDITION">REQUEST ADDITION TO NAVKAR CATALOG</option>
-                    </select>
-                  </div>
-
-                  <div className="form-group mb-3">
-                    <label className="form-label">PROJECT CONCEPT TITLE</label>
+                    <label className="form-label">What do you want us to make?</label>
                     <input 
                       type="text" 
                       required 
-                      placeholder="e.g. 18ft Golden Peacock Fountain for Resort Atrium" 
-                      className="cyber-input"
-                      value={updateTitle}
-                      onChange={(e) => setUpdateTitle(e.target.value)}
+                      placeholder="e.g. 15 ft Elephant with Fountain, or Custom Spiral Slide"
+                      className="clean-input"
+                      value={requestTitle}
+                      onChange={(e) => setRequestTitle(e.target.value)}
                     />
                   </div>
 
                   <div className="form-group mb-4">
-                    <label className="form-label">TECHNICAL SPECIFICATIONS & DIMENSIONS</label>
+                    <label className="form-label">Details / Dimensions</label>
                     <textarea 
                       rows={3} 
                       required 
-                      placeholder="Detail height, structural mounting, outdoor vs indoor, timeline..."
-                      className="cyber-input"
-                      value={updateDetails}
-                      onChange={(e) => setUpdateDetails(e.target.value)}
+                      placeholder="Describe preferred height, colors, where it will be installed..."
+                      className="clean-input"
+                      value={requestDetails}
+                      onChange={(e) => setRequestDetails(e.target.value)}
                     ></textarea>
                   </div>
 
                   <button type="submit" className="btn btn-primary w-full py-3">
-                    <IconTerminal size={16} />
-                    <span className="mono">TRANSMIT DESIGN BRIEF // 02</span>
+                    Submit Custom Request
                   </button>
                 </form>
               )}
@@ -239,89 +152,43 @@ export const RequestTokenModal = ({ isOpen, onClose }) => {
       </div>
 
       <style>{`
-        .token-modal-tabs {
+        .modal-tabs {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          border-bottom: 1px solid var(--border-dim);
-          background: rgba(0,0,0,0.25);
+          border-bottom: 1px solid var(--border-subtle);
         }
 
-        .token-tab-btn {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 8px;
+        .tab-btn {
           padding: 12px;
-          font-family: var(--font-mono);
-          font-size: 11.5px;
-          color: var(--text-muted);
+          font-size: 13px;
+          font-weight: 600;
+          color: var(--text-secondary);
           border-bottom: 2px solid transparent;
           cursor: pointer;
           transition: all var(--transition-fast);
         }
 
-        .token-tab-btn.active {
-          color: var(--accent);
-          border-bottom-color: var(--accent);
-          background: var(--accent-subtle);
-        }
-
-        .tier-pills {
-          display: flex;
-          gap: 8px;
-        }
-
-        .tier-pill {
-          flex: 1;
-          padding: 8px 6px;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid var(--border-dim);
-          border-radius: var(--radius-xs);
-          font-family: var(--font-mono);
-          font-size: 10.5px;
-          color: var(--text-muted);
-          cursor: pointer;
-          transition: all var(--transition-fast);
-          text-align: center;
-        }
-
-        .tier-pill.active {
-          border-color: var(--accent);
-          color: var(--accent);
-          background: var(--accent-subtle);
-          font-weight: 700;
+        .tab-btn.active {
+          color: var(--text-primary);
+          border-bottom-color: var(--text-primary);
+          background: var(--border-subtle);
         }
 
         .token-display-box {
-          background: #040508;
-          border: 1px solid var(--accent);
+          background: var(--bg-card);
+          border: 1px solid var(--border-mid);
           border-radius: var(--radius-sm);
-          padding: 16px;
-          box-shadow: 0 0 20px var(--accent-subtle);
-        }
-
-        .token-string {
-          font-size: 16px;
-          font-weight: 700;
-          color: #ffffff;
-          padding: 10px 0;
-          letter-spacing: 0.08em;
+          padding: 18px;
           text-align: center;
-          word-break: break-all;
-          text-shadow: 0 0 10px var(--accent-glow);
         }
 
-        .token-specs-card {
-          background: rgba(255,255,255,0.02);
-          border: 1px solid var(--border-dim);
-          padding: 12px;
-          border-radius: var(--radius-xs);
+        .token-code {
+          font-size: 20px;
+          font-weight: 800;
+          letter-spacing: 0.05em;
+          color: var(--text-primary);
+          padding: 8px 0;
         }
-
-        .justify-between { justify-content: space-between; }
-        .flex-1 { flex: 1; }
-        .text-center { text-align: center; }
-        .py-4 { padding-top: 16px; padding-bottom: 16px; }
       `}</style>
     </div>
   );

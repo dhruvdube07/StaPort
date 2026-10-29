@@ -1,164 +1,161 @@
 import React from 'react';
 import { IconExternalLink, IconMail, IconKey, IconSliders } from './Icons';
-import { sounds } from '../utils/soundEngine';
 
 export const Footer = ({ onOpenModal }) => {
   return (
-    <footer className="footer-wrap">
+    <footer className="clean-footer">
       <div className="footer-container">
         <div className="footer-top-grid">
-          {/* Brand Col */}
+          {/* Brand */}
           <div className="footer-brand-col">
-            <div className="flex-align gap-2 mb-2">
-              <span className="hud-dot"></span>
-              <span className="font-display font-bold text-lg text-main">NAVKAR CREATIVE ARTS</span>
-            </div>
-            <p className="text-muted text-xs leading-relaxed max-w-sm mb-3">
-              Master artisans and composite engineers. Delivering museum-grade animal sculptures, high-speed resort water flumes, readymade pools, and playground structures across India and globally.
+            <h3 className="footer-brand-title">Navkar Creative Arts</h3>
+            <p className="footer-brand-desc">
+              Manufacturer of handcrafted fiberglass animal statues, contemporary abstract sculptures, resort water park slides, swimming pools, and outdoor playground equipment.
             </p>
-            <div className="mono text-xs text-dim">
-              DEPLOYED VIA VERCEL EDGE RUNTIME // ZERO BOTTLENECK
+            <div className="footer-contact-info">
+              <div>Phone: +91 98200 12345</div>
+              <div>Email: info@navkarcreativearts.com</div>
+              <div>Factory: Gujarat & Maharashtra, India</div>
             </div>
           </div>
 
-          {/* Core Home Actions Col */}
+          {/* Quick Actions */}
           <div className="footer-col">
-            <div className="mono text-xs text-accent mb-3">// ACTION HUDS</div>
-            <div className="footer-links-list">
-              <button 
-                className="footer-link-btn" 
-                onClick={() => {
-                  sounds.playLaser();
-                  onOpenModal('contact');
-                }}
-              >
-                <IconMail size={12} />
-                <span>01 // Contact & Direct RFQ</span>
+            <h4 className="footer-col-title">Quick Actions</h4>
+            <div className="footer-links">
+              <button className="footer-link-btn" onClick={() => onOpenModal('contact')}>
+                <IconMail size={13} />
+                <span>Contact & Inquiries</span>
               </button>
-              <button 
-                className="footer-link-btn" 
-                onClick={() => {
-                  sounds.playLaser();
-                  onOpenModal('request_token');
-                }}
-              >
-                <IconKey size={12} />
-                <span>02 // Request Token & Catalog</span>
+              <button className="footer-link-btn" onClick={() => onOpenModal('request_token')}>
+                <IconKey size={13} />
+                <span>Request Quote Token</span>
               </button>
-              <button 
-                className="footer-link-btn" 
-                onClick={() => {
-                  sounds.playLaser();
-                  onOpenModal('settings');
-                }}
-              >
-                <IconSliders size={12} />
-                <span>03 // Settings & Admin Portal</span>
+              <button className="footer-link-btn" onClick={() => onOpenModal('settings')}>
+                <IconSliders size={13} />
+                <span>Settings & Admin</span>
               </button>
             </div>
           </div>
 
-          {/* Repositories & Reference Col */}
+          {/* Direct WhatsApp & Repos */}
           <div className="footer-col">
-            <div className="mono text-xs text-accent mb-3">// CONNECTIVITY</div>
-            <div className="footer-links-list">
+            <h4 className="footer-col-title">Direct Connect</h4>
+            <div className="footer-links">
+              <a 
+                href="https://wa.me/919820012345" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="footer-link-a"
+              >
+                <span>WhatsApp Workshop</span>
+                <IconExternalLink size={12} />
+              </a>
               <a 
                 href="https://github.com/dhruvdube07/StaPort" 
                 target="_blank" 
                 rel="noreferrer" 
                 className="footer-link-a"
-                onClick={() => sounds.playBlip(750)}
               >
-                <span>GitHub // dhruvdube07/StaPort</span>
+                <span>GitHub Repository</span>
                 <IconExternalLink size={12} />
               </a>
-              <a 
-                href="https://www.lumina-design.co/" 
-                target="_blank" 
-                rel="noreferrer" 
-                className="footer-link-a"
-                onClick={() => sounds.playBlip(750)}
-              >
-                <span>UI Inspiration // Lumina Global Design</span>
-                <IconExternalLink size={12} />
-              </a>
-              <span className="mono text-xs text-dim">WORKSHOP: +91 98200 12345</span>
             </div>
           </div>
         </div>
 
-        {/* Footer Bottom Bar */}
-        <div className="footer-bottom flex-align justify-between pt-4 mt-4">
-          <div className="mono text-xs text-dim">
-            © 2026 NAVKAR CREATIVE ARTS. ALL RIGHTS RESERVED.
-          </div>
-          <div className="flex-align gap-3 mono text-xs text-dim">
-            <span>LOCATION: GUJARAT / MAHARASHTRA WORKSHOPS</span>
-            <span>SPEC: ASTM COMPLIANT</span>
-            <span className="text-accent font-bold">STATUS: WORKSHOP ACTIVE</span>
-          </div>
+        {/* Bottom */}
+        <div className="footer-bottom">
+          <div>© {new Date().getFullYear()} Navkar Creative Arts. All rights reserved.</div>
+          <div className="text-secondary text-xs">Direct Factory Manufacturer • All India Delivery</div>
         </div>
       </div>
 
       <style>{`
-        .footer-wrap {
-          background: #040508;
-          border-top: 1px solid var(--border-dim);
+        .clean-footer {
+          background: var(--bg-surface);
+          border-top: 1px solid var(--border-subtle);
           padding: 60px 0 32px;
-          position: relative;
-          z-index: 10;
+          color: var(--text-primary);
         }
 
         .footer-container {
-          max-width: 1360px;
+          max-width: 1320px;
           margin: 0 auto;
-          padding: 0 20px;
+          padding: 0 24px;
         }
 
         .footer-top-grid {
           display: grid;
-          grid-template-columns: 1.5fr 1fr 1.2fr;
+          grid-template-columns: 1.6fr 1fr 1fr;
           gap: 40px;
+          margin-bottom: 40px;
         }
 
-        .max-w-sm { max-width: 320px; }
+        .footer-brand-title {
+          font-family: var(--font-heading);
+          font-size: 20px;
+          margin-bottom: 12px;
+        }
 
-        .footer-links-list {
+        .footer-brand-desc {
+          color: var(--text-secondary);
+          font-size: 13.5px;
+          line-height: 1.6;
+          max-width: 380px;
+          margin-bottom: 16px;
+        }
+
+        .footer-contact-info {
+          font-size: 13px;
+          color: var(--text-secondary);
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: 4px;
+        }
+
+        .footer-col-title {
+          font-size: 14px;
+          font-weight: 700;
+          margin-bottom: 16px;
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
+        }
+
+        .footer-links {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
         }
 
         .footer-link-btn, .footer-link-a {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          color: var(--text-muted);
-          font-family: var(--font-mono);
-          font-size: 12px;
+          color: var(--text-secondary);
+          font-size: 13.5px;
           cursor: pointer;
-          transition: color var(--transition-fast);
+          transition: color 0.2s;
           text-align: left;
         }
 
         .footer-link-btn:hover, .footer-link-a:hover {
-          color: var(--accent);
+          color: var(--text-primary);
         }
 
         .footer-bottom {
-          border-top: 1px solid var(--border-dim);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding-top: 24px;
+          border-top: 1px solid var(--border-subtle);
+          font-size: 13px;
+          color: var(--text-muted);
         }
 
-        @media (max-width: 850px) {
-          .footer-top-grid {
-            grid-template-columns: 1fr;
-            gap: 28px;
-          }
-          .footer-bottom {
-            flex-direction: column;
-            gap: 12px;
-            align-items: flex-start;
-          }
+        @media (max-width: 800px) {
+          .footer-top-grid { grid-template-columns: 1fr; gap: 32px; }
+          .footer-bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
         }
       `}</style>
     </footer>

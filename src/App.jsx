@@ -9,13 +9,12 @@ import { SettingsModal } from './components/SettingsModal';
 import { ProductQuickViewModal } from './components/ProductQuickViewModal';
 import { CartDrawer } from './components/CartDrawer';
 import { INITIAL_SECTIONS, INITIAL_PRODUCTS } from './data/initialData';
-import { sounds } from './utils/soundEngine';
 
 export function App() {
   // Page sections state with LocalStorage persistence
   const [sections, setSections] = useState(() => {
     try {
-      const saved = localStorage.getItem('vexo_custom_layout');
+      const saved = localStorage.getItem('navkar_clean_layout');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) return parsed;
@@ -24,37 +23,20 @@ export function App() {
     return INITIAL_SECTIONS;
   });
 
-  // Product catalog state
+  // Product catalog state (all 25 products)
   const [products, setProducts] = useState(INITIAL_PRODUCTS);
 
-  // Theme & Performance state
+  // Simple Theme State: 'dark' (black) or 'light' (white)
   const [activeTheme, setActiveTheme] = useState(() => {
-    return localStorage.getItem('vexo_theme') || 'sunset';
-  });
-
-  const [perfMode, setPerfMode] = useState(() => {
-    // Auto-detect low memory devices (e.g. 1GB / 2GB RAM phones)
-    if (typeof navigator !== 'undefined') {
-      if (navigator.deviceMemory && navigator.deviceMemory <= 2) {
-        return 'eco';
-      }
-      if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) {
-        return 'eco';
-      }
-    }
-    return localStorage.getItem('vexo_perf') || 'balanced';
-  });
-
-  const [soundEnabled, setSoundEnabled] = useState(() => {
-    return localStorage.getItem('vexo_sound') !== 'false';
+    return localStorage.getItem('navkar_theme') || 'dark';
   });
 
   // Admin authentication state
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(() => {
-    return localStorage.getItem('vexo_admin') === 'true';
+    return localStorage.getItem('navkar_admin') === 'true';
   });
 
-  // Elementor Studio state
+  // Elementor Studio state (Desktop Page Builder)
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [selectedSectionId, setSelectedSectionId] = useState(sections[0]?.id || 'sec-hero');
   const [viewportMode, setViewportMode] = useState('desktop'); // 'desktop' | 'tablet' | 'mobile'
@@ -64,10 +46,10 @@ export function App() {
   const [activeModal, setActiveModal] = useState(null); // 'contact' | 'request_token' | 'settings' | null
   const [quickViewProduct, setQuickViewProduct] = useState(null);
 
-  // Cart state
+  // Quote Basket state
   const [cart, setCart] = useState(() => {
     try {
-      const saved = localStorage.getItem('vexo_cart');
+      const saved = localStorage.getItem('navkar_quote_cart');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -75,25 +57,19 @@ export function App() {
   });
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
 
-  // Sync Theme & Perf to Document Root
+  // Sync Theme to Document Root
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', activeTheme);
-    localStorage.setItem('vexo_theme', activeTheme);
+    localStorage.setItem('navkar_theme', activeTheme);
   }, [activeTheme]);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-perf', perfMode);
-    localStorage.setItem('vexo_perf', perfMode);
-  }, [perfMode]);
-
-  useEffect(() => {
-    sounds.toggle(soundEnabled);
-    localStorage.setItem('vexo_sound', String(soundEnabled));
-  }, [soundEnabled]);
-
-  useEffect(() => {
-    localStorage.setItem('vexo_cart', JSON.stringify(cart));
+    localStorage.setItem('navkar_quote_cart', JSON.stringify(cart));
   }, [cart]);
+
+  const toggleTheme = () => {
+    setActiveTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   // Section Handlers for Elementor
   const handleMoveSection = (id, direction) => {
@@ -106,7 +82,6 @@ export function App() {
     const [moved] = newSections.splice(index, 1);
     newSections.splice(targetIndex, 0, moved);
     setSections(newSections);
-    sounds.playLaser();
   };
 
   const handleDuplicateSection = (id) => {
@@ -121,7 +96,6 @@ export function App() {
     newSections.splice(index + 1, 0, duplicated);
     setSections(newSections);
     setSelectedSectionId(duplicated.id);
-    sounds.playSuccess();
   };
 
   const handleDeleteSection = (id) => {
@@ -129,38 +103,37 @@ export function App() {
     const newSections = sections.filter((s) => s.id !== id);
     setSections(newSections);
     setSelectedSectionId(newSections[0].id);
-    sounds.playLaser();
   };
 
-  // Cart Handlers
-  const handleAddToCart = (product, size = 'M') => {
+  // Quote Basket Handlers
+  const handleAddToCart = (product) => {
     setCart((prev) => {
-      const existing = prev.find((item) => item.id === product.id && item.size === size);
+      const existing = prev.find((item) => item.id === product.id);
       if (existing) {
         return prev.map((item) => 
-          item.id === product.id && item.size === size 
+          item.id === product.id 
             ? { ...item, quantity: item.quantity + 1 } 
             : item
         );
       }
-      return [...prev, { ...product, size, quantity: 1 }];
+      return [...prev, { ...product, quantity: 1 }];
     });
   };
 
-  const handleUpdateCartQuantity = (id, size, newQty) => {
+  const handleUpdateCartQuantity = (id, _unused, newQty) => {
     if (newQty <= 0) {
-      handleRemoveCartItem(id, size);
+      handleRemoveCartItem(id);
       return;
     }
     setCart((prev) => 
       prev.map((item) => 
-        item.id === id && item.size === size ? { ...item, quantity: newQty } : item
+        item.id === id ? { ...item, quantity: newQty } : item
       )
     );
   };
 
-  const handleRemoveCartItem = (id, size) => {
-    setCart((prev) => prev.filter((item) => !(item.id === id && item.size === size)));
+  const handleRemoveCartItem = (id) => {
+    setCart((prev) => prev.filter((item) => item.id !== id));
   };
 
   const totalCartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
@@ -187,12 +160,12 @@ export function App() {
         style={{
           maxWidth: isEditorOpen && viewportMode === 'mobile' ? '390px' : isEditorOpen && viewportMode === 'tablet' ? '768px' : '100%',
           margin: isEditorOpen && viewportMode !== 'desktop' ? '30px auto' : '0 auto',
-          boxShadow: isEditorOpen && viewportMode !== 'desktop' ? '0 0 50px rgba(0, 242, 254, 0.25), 0 0 0 1px var(--border-bright)' : 'none',
-          borderRadius: isEditorOpen && viewportMode !== 'desktop' ? '28px' : '0',
+          boxShadow: isEditorOpen && viewportMode !== 'desktop' ? '0 10px 40px rgba(0, 0, 0, 0.3)' : 'none',
+          borderRadius: isEditorOpen && viewportMode !== 'desktop' ? '24px' : '0',
           overflow: isEditorOpen && viewportMode !== 'desktop' ? 'hidden' : 'visible'
         }}
       >
-        {/* Navigation Bar with 3 requested actions: Contact, Request Token, Settings */}
+        {/* Navigation Bar with 3 requested actions: Contact, Request Quote / Token, Settings */}
         <Navbar 
           onOpenModal={(modal) => setActiveModal(modal)}
           cartCount={totalCartCount}
@@ -206,6 +179,8 @@ export function App() {
               setIsEditorOpen(!isEditorOpen);
             }
           }}
+          activeTheme={activeTheme}
+          onToggleTheme={toggleTheme}
         />
 
         {/* Dynamic Page Sections */}
@@ -253,19 +228,15 @@ export function App() {
         onClose={() => setActiveModal(null)}
         activeTheme={activeTheme}
         onSelectTheme={setActiveTheme}
-        perfMode={perfMode}
-        onSelectPerfMode={setPerfMode}
-        soundEnabled={soundEnabled}
-        onToggleSound={() => setSoundEnabled(!soundEnabled)}
         isAdminLoggedIn={isAdminLoggedIn}
         onAdminLogin={() => {
           setIsAdminLoggedIn(true);
-          localStorage.setItem('vexo_admin', 'true');
+          localStorage.setItem('navkar_admin', 'true');
         }}
         onAdminLogout={() => {
           setIsAdminLoggedIn(false);
           setIsEditorOpen(false);
-          localStorage.removeItem('vexo_admin');
+          localStorage.removeItem('navkar_admin');
         }}
         onLaunchEditor={() => setIsEditorOpen(true)}
       />
@@ -278,7 +249,7 @@ export function App() {
         onAddToCart={handleAddToCart}
       />
 
-      {/* Shopping Cart Drawer */}
+      {/* Shopping / Quote Inquiry Drawer */}
       <CartDrawer 
         isOpen={cartDrawerOpen}
         onClose={() => setCartDrawerOpen(false)}
@@ -300,7 +271,7 @@ export function App() {
 
         .app-canvas-container {
           transition: max-width 0.3s cubic-bezier(0.16, 1, 0.3, 1), margin 0.3s ease;
-          background: var(--bg-deep);
+          background: var(--bg-main);
           min-height: 100vh;
         }
 
