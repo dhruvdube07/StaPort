@@ -5,7 +5,8 @@ import {
   IconSliders, 
   IconCart, 
   IconEdit, 
-  IconClose 
+  IconClose,
+  IconShield 
 } from './Icons';
 
 export const Navbar = ({ 
@@ -59,14 +60,15 @@ export const Navbar = ({
             <span>Request Quote / Token</span>
           </button>
 
-          {/* Button 3: Settings */}
+          {/* Button 3: Admin Login & Settings */}
           <button 
             id="nav-btn-settings"
             className="btn btn-secondary nav-action-btn" 
             onClick={() => handleAction('settings')}
+            title="Open Admin Login & Settings"
           >
-            <IconSliders size={15} />
-            <span>Settings</span>
+            <IconShield size={15} />
+            <span>{isAdminLoggedIn ? 'Admin Active' : 'Admin Login'}</span>
           </button>
 
           {/* Admin Studio Trigger (when logged in) */}
@@ -134,7 +136,7 @@ export const Navbar = ({
             className="btn btn-secondary w-full mb-2 text-left" 
             onClick={() => handleAction('settings')}
           >
-            <IconSliders size={16} /> Settings
+            <IconShield size={16} /> {isAdminLoggedIn ? 'Admin Active (Settings)' : 'Admin Login'}
           </button>
 
           {isAdminLoggedIn && (

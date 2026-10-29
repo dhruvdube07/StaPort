@@ -33,7 +33,7 @@ export const Footer = ({ onOpenModal }) => {
               </button>
               <button className="footer-link-btn" onClick={() => onOpenModal('settings')}>
                 <IconSliders size={13} />
-                <span>Settings & Admin</span>
+                <span>Admin Login & Settings</span>
               </button>
             </div>
           </div>
