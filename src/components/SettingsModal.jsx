@@ -21,7 +21,8 @@ export const SettingsModal = ({
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     const uid = userId.trim().toLowerCase();
-    if ((uid === 'admin' || uid === 'navkar') && (password === 'vexo2026' || password === 'navkar2026')) {
+    const pwd = password.trim();
+    if ((uid === 'admin.in' && pwd === 'in.admin') || (uid === 'admin' && pwd === 'in.admin')) {
       setAuthError(false);
       onAdminLogin();
     } else {
@@ -130,20 +131,32 @@ export const SettingsModal = ({
                   </p>
 
                   {/* Demo helper */}
-                  <div className="demo-credentials-box mb-3">
-                    <span className="text-xs font-semibold uppercase text-secondary">Demo Credentials:</span>
+                  <div 
+                    className="demo-credentials-box mb-3"
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      setUserId('admin.in');
+                      setPassword('in.admin');
+                      setAuthError(false);
+                    }}
+                    title="Click to auto-fill admin credentials"
+                  >
+                    <div className="flex-between">
+                      <span className="text-xs font-semibold uppercase text-secondary">Admin Login Credentials:</span>
+                      <span className="text-xs text-secondary" style={{ textDecoration: 'underline' }}>Click to auto-fill</span>
+                    </div>
                     <div className="flex-align gap-3 text-xs mt-1">
-                      <span>User ID: <strong>admin</strong></span>
-                      <span>Password: <strong>vexo2026</strong></span>
+                      <span>Login ID: <strong>admin.in</strong></span>
+                      <span>Password: <strong>in.admin</strong></span>
                     </div>
                   </div>
 
                   <div className="form-group mb-3">
-                    <label className="form-label">User ID</label>
+                    <label className="form-label">Login ID</label>
                     <input 
                       type="text" 
                       required 
-                      placeholder="admin"
+                      placeholder="admin.in"
                       className="clean-input"
                       value={userId}
                       onChange={(e) => {
@@ -158,7 +171,7 @@ export const SettingsModal = ({
                     <input 
                       type="password" 
                       required 
-                      placeholder="••••••••"
+                      placeholder="in.admin"
                       className="clean-input"
                       value={password}
                       onChange={(e) => {
@@ -170,7 +183,7 @@ export const SettingsModal = ({
 
                   {authError && (
                     <div className="error-text text-xs mb-3">
-                      Invalid User ID or Password. Please check demo credentials above.
+                      Invalid Login ID or Password. Expected Login ID: <strong>admin.in</strong> & Password: <strong>in.admin</strong>
                     </div>
                   )}
 
@@ -241,6 +254,9 @@ export const SettingsModal = ({
           color: #ef4444;
           font-weight: 600;
         }
+
+        .flex-align { display: flex; align-items: center; }
+        .flex-between { display: flex; align-items: center; justify-content: space-between; }
       `}</style>
     </div>
   );
